@@ -1,5 +1,7 @@
 package com.zeffee.lib;
 
+import net.sf.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,12 +16,20 @@ public class ResponseMap {
         dataMap = new HashMap<String, Object>();
     }
 
-    public ResponseMap put(String key,Object value) {
+    ResponseMap put(String key,Object value) {
         dataMap.put(key,value);
         return this;
     }
 
-    public Map<String, Object> getDataMap() {
+    Map<String, Object> getDataMap() {
         return dataMap;
+    }
+
+    static Map<String, Object> getResponseBody(int status, Object data, String errorMsg) {
+        return new ResponseMap()
+                .put("status", status)
+                .put("data", data)
+                .put("errorMsg", errorMsg)
+                .getDataMap();
     }
 }

@@ -1,15 +1,16 @@
 package com.zeffee.controller;
 
-import com.sun.deploy.net.HttpResponse;
 import com.zeffee.entity.Theme;
 import com.zeffee.lib.Common;
+import com.zeffee.lib.Wechat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.zeffee.dao.ThemeDAO;
@@ -57,16 +58,9 @@ public class ThemeController {
         return Common.getResponseMap(200, votesList);
     }
 
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public String invalidParam(MethodArgumentTypeMismatchException e) {
-        return "Poisonous parameter!";
-    }
 
-
-    @RequestMapping(value = "/verify_{roomNum}.html", method = RequestMethod.GET)
-    public void testVerify(@PathVariable(value = "roomNum") String roomNum, @RequestParam(value = "code") String code, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().print(Common.toJson(Common.getResponseMap(200, roomNum + "-" + code)));
+    @RequestMapping(value = "/getOpenid", method = RequestMethod.GET)
+    public Map<String, Object> verify(HttpSession session) {
+        return Common.getResponseMap(200, session.getAttribute("openid"));
     }
 }
