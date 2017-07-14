@@ -1,7 +1,6 @@
 package com.zeffee.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,14 +29,14 @@ public class Theme {
     @Column(name = "start_time")
     @NotNull(message = "startTime is not null!")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private  Date start_time;
+    private Date start_time;
 
     @Column(name = "end_time")
     @NotNull(message = "endTime is not null!")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date end_time;
 
-    @Column(insertable = false)
+    @Column(insertable = false, updatable = false)
     private int counts;
 
     @Column(name = "votes_per_user")
@@ -74,11 +73,10 @@ public class Theme {
     public Theme() {
     }
 
-    public Theme(String title, Date start_time, Date end_time, int counts, int votes_per_user) {
+    public Theme(String title, Date start_time, Date end_time, int votes_per_user) {
         this.title = title;
         this.start_time = start_time;
         this.end_time = end_time;
-        this.counts = counts;
         this.votes_per_user = votes_per_user;
     }
 

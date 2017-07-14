@@ -1,22 +1,15 @@
 package com.zeffee.controller;
 
+import com.zeffee.dao.ThemeDAO;
 import com.zeffee.entity.Theme;
 import com.zeffee.lib.Common;
-import com.zeffee.lib.Wechat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import com.zeffee.dao.ThemeDAO;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +23,7 @@ public class ThemeController {
     private ThemeDAO themeDAO;
 
     @RequestMapping(value = "/addTheme", method = RequestMethod.POST)
-    public Map<String, Object> addTheme(@RequestBody @Valid Theme theme, BindingResult result) {
+    public Map<String, Object> addTheme(@RequestBody @Valid Theme theme, BindingResult result, HttpSession session) {
         if (result.hasErrors()) {
             return Common.getResponseMap(500, result.getFieldError().getDefaultMessage());
         }
@@ -39,8 +32,9 @@ public class ThemeController {
             return Common.getResponseMap(500, "EndTime needs after StartTime!");
         }
 
-        theme.setUid("qwertyui71234567890123456789");
+        theme.setUid(session.getAttribute("openid").toString());
         themeDAO.addTheme(theme);
+
         return Common.getResponseMap(200, theme.getTid());
     }
 
@@ -52,12 +46,11 @@ public class ThemeController {
     }
 
     @RequestMapping(value = "/getTheme", method = RequestMethod.GET)
-    public Map<String, Object> getTheme() {
-        String uid = "qwertyui71234567890123456789";
-        List<Theme> votesList = themeDAO.getMyThemeList(uid);
+    public Map<String, Object> getTheme(HttpSession session) {
+        String uid = session.getAttribute("openid").toString();
+        List votesList = themeDAO.getMyThemeList(uid);
         return Common.getResponseMap(200, votesList);
     }
-
 
     @RequestMapping(value = "/getOpenid", method = RequestMethod.GET)
     public Map<String, Object> verify(HttpSession session) {
