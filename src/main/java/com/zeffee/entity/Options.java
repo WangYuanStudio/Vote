@@ -19,8 +19,15 @@ public class Options {
     @NotNull(message = "content is not null!")
     private String content;
 
-    @Column(insertable = false)
+    @Column(insertable = false, updatable = false)
     private int counts;
+
+    public Options() {
+    }
+
+    public Options(String content) {
+        this.content = content;
+    }
 
     public int getTid() {
         return tid;

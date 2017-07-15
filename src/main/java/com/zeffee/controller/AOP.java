@@ -18,11 +18,11 @@ public class AOP {
     @Autowired
     private HttpSession session;
 
-    @Pointcut("execution(* com.zeffee.controller.ThemeController.*(..))")
-    public void cut() {
+    @Pointcut("execution(* com.zeffee.controller.ThemeController.*(..)) || execution(* com.zeffee.controller.VoteController.*(..)) ")
+    public void loginCut() {
     }
 
-    @Before("cut()")
+    @Before("loginCut()")
     public void checkUserStatus() {
         if (session.getAttribute("openid") == null) {
             throw new InvalidStatusException("Please login again!");

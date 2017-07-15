@@ -1,7 +1,9 @@
 package com.zeffee.lib;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,4 +25,13 @@ public class Common {
     public static String toJson(Object object) {
         return JSONObject.fromObject(object).toString();
     }
+
+    public static List toListFromJson(String json) {
+        return JSONArray.toList(JSONArray.fromObject(json));
+    }
+
+    public static String toJsonFromList(List list) {
+        return JSONArray.fromObject(list).toString();
+    }
+
 }

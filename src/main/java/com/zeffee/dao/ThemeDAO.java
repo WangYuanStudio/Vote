@@ -16,17 +16,7 @@ import java.util.List;
  * Created by zeffee on 2017/6/2.
  */
 @Repository
-public class ThemeDAO {
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public ThemeDAO(LocalSessionFactoryBean sessionFactory) {
-        this.sessionFactory = sessionFactory.getObject();
-    }
-
-    private Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
+public class ThemeDAO extends BaseDAO {
 
     public int addTheme(Theme theme) {
         Serializable id = getSession().save(theme);
@@ -34,9 +24,21 @@ public class ThemeDAO {
         return (int) id;
     }
 
+    public List getOidListByTid(int tid) {
+        return getSession().createSQLQuery("select oid from theme inner join options on theme.tid=options.tid where theme.tid=?")
+                .setParameter(0, tid)
+                .list();
+    }
+
     public int deleteTheme(int tid) {
         return getSession().createQuery("delete from Theme where tid=?").setParameter(0, tid).executeUpdate();
     }
+
+
+    public void updateTheme(Theme theme) {
+        getSession().update(getSession().merge(theme));
+    }
+
 
     public List getMyThemeList(String uid) {
         return getSession()
@@ -46,7 +48,7 @@ public class ThemeDAO {
                 .list();
     }
 
-    public Theme getThemeByTid(int tid) {
+    public Theme getThemeDetailByTid(int tid) {
         return (Theme) getSession().get(Theme.class, tid);
     }
 }

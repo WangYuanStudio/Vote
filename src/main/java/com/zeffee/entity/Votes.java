@@ -14,7 +14,7 @@ public class Votes {
 
     @Column
     @NotNull(message = "uid is not null!")
-    private int uid;
+    private String uid;
 
     @Column
     @NotNull(message = "oid is not null!")
@@ -34,13 +34,12 @@ public class Votes {
         return this;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public Votes setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
-        return this;
     }
 
     public int getOid() {

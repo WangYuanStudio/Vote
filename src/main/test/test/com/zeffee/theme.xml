@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <theme tid="1" title="title123" start_time="2017-06-13 00:00:00" end_time="2017-06-13 01:00:00" counts="300" votes_per_user="2" uid="zeffee"/>
-    <theme tid="2" title="title1236789" start_time="2017-06-13 02:00:00" end_time="2017-06-13 04:00:00" counts="320" votes_per_user="3" uid="zeffee"/>
-    <theme tid="3" title="title1236789777" start_time="2017-06-13 12:00:00" end_time="2017-06-13 14:00:00" counts="333" votes_per_user="3" uid="self"/>
+    <theme tid="1" title="title123" start_time="2017-06-13 00:00:00" end_time="2017-06-13 01:00:00" counts="0" votes_per_user="2" anonymous="0" uid="zeffee" oid_list="[1,2]"/>
+    <theme tid="2" title="title1236789" start_time="2017-06-13 02:00:00" end_time="2017-06-13 04:00:00" counts="320" votes_per_user="3" anonymous="0" uid="zeffee"/>
+    <theme tid="3" title="title1236789777" start_time="2017-06-13 12:00:00" end_time="2017-06-13 14:00:00" counts="333" votes_per_user="3" anonymous="0" uid="self"/>
 
     <options oid="1" tid="1" content="shitter options 1" counts="3"/>
+    <options oid="2" tid="1" content="shitter options 2" counts="2"/>
+
+    <votes vid="1" uid="zeffee" oid="1" tid="1"/>
+    <votes vid="2" uid="zeffee" oid="2" tid="1"/>
 </dataset>

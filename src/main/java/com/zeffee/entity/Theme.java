@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,8 +24,12 @@ public class Theme {
 
     @Column
     @NotNull(message = "title is not null!")
-    @Size(min = 1, max = 50, message = "size is illegal!")
+    @Size(min = 1, max = 50, message = "size of title needs between 1 and 50")
     private String title;
+
+    @Column
+    @Size(max = 200, message = "size of description needs between 0 and 200")
+    private String description;
 
     @Column(name = "start_time")
     @NotNull(message = "startTime is not null!")
@@ -41,11 +46,20 @@ public class Theme {
 
     @Column(name = "votes_per_user")
     @NotNull(message = "votes_per_user is not null!")
-    @Min(value = 1, message = "Needs larger than 1")
+    @Min(value = 1, message = "votes_per_user needs larger than 1")
+    @Max(value = 255, message = "votes_per_user needs larger than 255")
     private int votes_per_user;
 
     @Column(name = "uid")
     private String uid;
+
+    @Column(name = "anonymous")
+    @Min(value = 0, message = "anonymous need between 0 and 1")
+    @Max(value = 1, message = "anonymous need between 0 and 1")
+    private int anonymous;
+
+    @Column(name = "oid_list", insertable = false)
+    private String oid_list;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tid")
@@ -132,5 +146,29 @@ public class Theme {
     public Theme setVotes_per_user(int votes_per_user) {
         this.votes_per_user = votes_per_user;
         return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getAnonymous() {
+        return anonymous;
+    }
+
+    public void setAnonymous(int anonymous) {
+        this.anonymous = anonymous;
+    }
+
+    public String getOid_list() {
+        return oid_list;
+    }
+
+    public void setOid_list(String oid_list) {
+        this.oid_list = oid_list;
     }
 }
