@@ -32,7 +32,21 @@ public class VoteDAOTest extends DaoBaseTest {
         String oid_list = "[1,2]";
         Map<String, Object> dataMap = dao.getPerVoteAndOidListByTid(tid);
 
-        assertEquals("getPerVoteAndOidListByTid went wrong! Not the same data!", votes_per_user, (byte)dataMap.get("votes_per_user") & 0xFF);
+        assertEquals("getPerVoteAndOidListByTid went wrong! Not the same data!", votes_per_user, (byte) dataMap.get("votes_per_user") & 0xFF);
         assertEquals("getPerVoteAndOidListByTid went wrong! Not the same data!", oid_list, dataMap.get("oid_list"));
     }
+
+    @Test
+    public void testIncrementOptionCountByOid() {
+        int oid = 1;
+        int expectInfluenceLine=1;
+        int actualInfluenceLine = dao.incrementOptionCountByOid(oid);
+
+        int expectedCount = 4;
+        int actualCount = dao.getOptionsByOid(oid).getCounts();
+
+        assertEquals("influence line is not correct!", expectInfluenceLine, actualInfluenceLine);
+        assertEquals("incrementOptionCountByOid went wrong! Not the same data!", expectedCount, actualCount);
+    }
+
 }

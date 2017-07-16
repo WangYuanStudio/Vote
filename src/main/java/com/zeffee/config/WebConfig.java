@@ -1,7 +1,6 @@
 package com.zeffee.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zeffee.controller.AOP;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

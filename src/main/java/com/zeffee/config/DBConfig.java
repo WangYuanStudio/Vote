@@ -39,8 +39,8 @@ public class DBConfig {
         Properties properties = new Properties();
         properties.setProperty("dialect", "org.hibernate.dialect.MysqlDialect");
 
-        properties.put("hibernate.show_sql", true);
-        properties.put("hibernate.format_sql", true);
+        //properties.put("hibernate.show_sql", true);
+        //properties.put("hibernate.format_sql", true);
 
         localSessionFactoryBean.setHibernateProperties(properties);
         return localSessionFactoryBean;

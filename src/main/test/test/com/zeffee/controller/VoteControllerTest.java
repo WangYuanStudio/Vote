@@ -1,6 +1,5 @@
 package test.com.zeffee.controller;
 
-import com.zeffee.exception.UnDoneException;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
@@ -14,24 +13,30 @@ public class VoteControllerTest extends ControllerBaseTest {
     @Test
     public void testVoteWithErrorOid() throws Exception {
         String requestJson = "{\"tid\":1,\"oid\":[3]}";
-        mockMvc.perform(post("/vote").contentType(MediaType.APPLICATION_JSON).content(requestJson).sessionAttr("openid","zeffee2"))
-                .andExpect(isResponseContainSomeContent(ERROR_STATUS));
+        mockVote(requestJson, ERROR_STATUS);
     }
 
     @Test
     public void testVoteWithErrorOid2() throws Exception {
         String requestJson = "{\"tid\":1,\"oid\":[1,2,3]}";
-        mockMvc.perform(post("/vote").contentType(MediaType.APPLICATION_JSON).content(requestJson).sessionAttr("openid","zeffee2"))
-                .andExpect(isResponseContainSomeContent(ERROR_STATUS));
+        mockVote(requestJson, ERROR_STATUS);
+    }
+
+    @Test
+    public void testVoteWithErrorOid3() throws Exception {
+        String requestJson = "{\"tid\":1,\"oid\":[\"2\"]}";
+        mockVote(requestJson, ERROR_STATUS);
     }
 
     @Test
     public void testVoteWithCorrectOid() throws Exception {
         String requestJson = "{\"tid\":1,\"oid\":[2]}";
-        mockMvc.perform(post("/vote").contentType(MediaType.APPLICATION_JSON).content(requestJson).sessionAttr("openid","zeffee2"))
-                .andExpect(isResponseContainSomeContent(RIGHT_STATUS));
+        mockVote(requestJson, RIGHT_STATUS);
+    }
 
-        throw new UnDoneException("increment the count after voting!!!");
+    private void mockVote(String requestJson, String expectContent) throws Exception {
+        mockMvc.perform(post("/vote").contentType(MediaType.APPLICATION_JSON).content(requestJson).sessionAttr("openid", "zeffee2"))
+                .andExpect(isResponseContainSomeContent(expectContent));
     }
 
 

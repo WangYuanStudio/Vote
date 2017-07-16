@@ -18,7 +18,7 @@ public class AOP {
     @Autowired
     private HttpSession session;
 
-    @Pointcut("execution(* com.zeffee.controller.ThemeController.*(..)) || execution(* com.zeffee.controller.VoteController.*(..)) ")
+    @Pointcut("execution(* com.zeffee.controller.ThemeController.*(..)) || execution(* com.zeffee.controller.VoteController.*(..)) || execution(* com.zeffee.controller.UserController.*(..))")
     public void loginCut() {
     }
 

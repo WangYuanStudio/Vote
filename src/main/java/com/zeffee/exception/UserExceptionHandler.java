@@ -1,6 +1,7 @@
 package com.zeffee.exception;
 
 import com.zeffee.lib.Common;
+import org.apache.log4j.Logger;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,5 +25,15 @@ public class UserExceptionHandler {
     @ResponseBody
     public Map<String, Object> invalidUserStatus(HttpMessageNotReadableException e) {
         return Common.getResponseMap(500, e.getMessage().split(",", 2)[0]);
+    }
+
+    // server went wrong
+    @ExceptionHandler(ServerException.class)
+    @ResponseBody
+    public Map<String, Object> serverError(ServerException e) {
+        Logger logger = Logger.getLogger(ServerException.class);
+        logger.fatal(e.getMessage());
+
+        return Common.getResponseMap(500, "Server went wrong!");
     }
 }

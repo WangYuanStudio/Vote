@@ -42,13 +42,20 @@ public class ThemeDAO extends BaseDAO {
 
     public List getMyThemeList(String uid) {
         return getSession()
-                .createSQLQuery("select tid,title,start_time,end_time from Theme where uid=?")
+                .createSQLQuery("select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid=? union  select tid from votes where uid=?)")
                 .setParameter(0, uid)
+                .setParameter(1, uid)
                 .setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)
                 .list();
     }
 
     public Theme getThemeDetailByTid(int tid) {
         return (Theme) getSession().get(Theme.class, tid);
+    }
+
+    public boolean isAnonymousThemeByOid(int oid) {
+        return (boolean) getSession().createSQLQuery("select anonymous from options INNER JOIN theme on options.tid=theme.tid where options.oid=?")
+                .setParameter(0, oid)
+                .uniqueResult();
     }
 }

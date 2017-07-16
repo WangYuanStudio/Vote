@@ -2,6 +2,7 @@ package com.zeffee.controller;
 
 import com.zeffee.dao.VoteDAO;
 import com.zeffee.exception.InvalidStatusException;
+import com.zeffee.exception.ServerException;
 import com.zeffee.lib.Common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,8 @@ public class VoteController {
                 || !theme_oid_list.containsAll(user_vote_oid_list))
             return Common.getResponseMap(500, "Invaild Operation!");
 
+        incrementOptionCount(user_vote_oid_list);
+
         return Common.getResponseMap(200);
     }
 
@@ -54,5 +57,13 @@ public class VoteController {
     private void checkVoted_IfNotThrowException(String uid, int tid) {
         int vote_record_counts = dao.getSelfVoteRecordByTid(uid, tid);
         if (vote_record_counts > 0) throw new InvalidStatusException("Have voted already");
+    }
+
+    private void incrementOptionCount(List<Integer> oidList) {
+        for (Integer oid : oidList) {
+            if (1 != dao.incrementOptionCountByOid(oid)) {
+                throw new ServerException("increment option count went wrong! database down?");
+            }
+        }
     }
 }

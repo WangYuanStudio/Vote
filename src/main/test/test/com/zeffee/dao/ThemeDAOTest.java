@@ -32,7 +32,7 @@ public class ThemeDAOTest extends DaoBaseTest {
     public void testGetMyThemeList() throws DataSetException {
         String uid = "zeffee";
         QueryDataSet queryDataSet = new QueryDataSet(conn);
-        queryDataSet.addTable("theme", "select * from theme where uid='" + uid + "'");
+        queryDataSet.addTable("theme", "select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid='" + uid + "' union  select tid from votes where uid='" + uid + "')");
         ITable expected = queryDataSet.getTable("theme");
 
         List actual = dao.getMyThemeList(uid);
@@ -100,4 +100,13 @@ public class ThemeDAOTest extends DaoBaseTest {
         assertEquals("An error occurred when updating theme", newOptionsSize, newTheme.getOptions().size());
     }
 
+
+    @Test
+    public void testGetAnonymousByOid() {
+        int oid = 1;
+        int expectAnonymous = 0;
+        int actualAnonymous = dao.isAnonymousThemeByOid(oid) ? 1 : 0;
+
+        assertEquals("getAnonymousByOid went wrong!", expectAnonymous, actualAnonymous);
+    }
 }
