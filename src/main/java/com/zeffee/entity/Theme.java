@@ -50,7 +50,7 @@ public class Theme {
     @Max(value = 255, message = "votes_per_user needs larger than 255")
     private int votes_per_user;
 
-    @Column(name = "uid")
+    @Column(name = "uid", updatable = false)
     private String uid;
 
     @Column(name = "anonymous")
@@ -61,8 +61,8 @@ public class Theme {
     @Column(name = "oid_list", insertable = false)
     private String oid_list;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tid")
+
+    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Options> options;
 
 

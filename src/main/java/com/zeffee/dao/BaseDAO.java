@@ -16,7 +16,7 @@ public class BaseDAO {
     public BaseDAO() {
     }
 
-    protected Session getSession() {
+    public Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 }

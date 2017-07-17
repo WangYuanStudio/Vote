@@ -1,6 +1,7 @@
 package com.zeffee.controller;
 
 import com.zeffee.dao.ThemeDAO;
+import com.zeffee.entity.Options;
 import com.zeffee.entity.Theme;
 import com.zeffee.exception.InvalidStatusException;
 import com.zeffee.lib.Common;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -34,35 +36,38 @@ public class ThemeController {
         }
 
         theme.setUid(session.getAttribute("openid").toString());
+        setThemeOnOption(theme);
         themeDAO.addTheme(theme);
 
-        List oidList = themeDAO.getOidListByTid(theme.getTid());
-        theme.setOid_list(Common.toJsonFromList(oidList));
-        themeDAO.updateTheme(theme);
+        updateThemeOidList(theme);
 
         return Common.getResponseMap(200, theme.getTid());
     }
 
     @RequestMapping(value = "/deleteTheme/{tid}", method = RequestMethod.DELETE)
     public Map<String, Object> deleteTheme(@PathVariable(value = "tid") int tid, HttpSession session) {
-        //TODO:: 事务处理
-        checkSelfThemeAndZeroCount_IfNotThrowException(tid, session);
+        Theme theme = checkSelfThemeAndZeroCount_IfNotThrowException(tid, session);
 
-        int status = themeDAO.deleteTheme(tid) == 1 ? 200 : 500;
+        themeDAO.deleteTheme(theme);
 
-        return Common.getResponseMap(status);
+        return Common.getResponseMap(200);
     }
 
     @RequestMapping(value = "/updateTheme", method = RequestMethod.PUT)
     public Map<String, Object> updateTheme(@RequestBody @Valid Theme theme, BindingResult result, HttpSession session) {
-        //TODO:: 事务处理
         if (result.hasErrors()) {
             return Common.getResponseMap(500, result.getFieldError().getDefaultMessage());
         }
 
         checkSelfThemeAndZeroCount_IfNotThrowException(theme.getTid(), session);
 
+        themeDAO.deleteOptionsByTid(theme.getTid());
+
+        setThemeOnOption(theme);
         themeDAO.updateTheme(theme);
+
+        theme.setOptions(null);
+        updateThemeOidList(theme);
 
         return Common.getResponseMap(200);
     }
@@ -71,6 +76,13 @@ public class ThemeController {
     public Map<String, Object> getMyThemeList(HttpSession session) {
         String uid = session.getAttribute("openid").toString();
         List votesList = themeDAO.getMyThemeList(uid);
+        return Common.getResponseMap(200, votesList);
+    }
+
+    @RequestMapping(value = "/getMyThemeList.search", method = RequestMethod.GET)
+    public Map<String, Object> getMyThemeList(@RequestParam(value = "content") String searchContent, HttpSession session) throws UnsupportedEncodingException {
+        String uid = session.getAttribute("openid").toString();
+        List votesList = themeDAO.getMyThemeList(uid, searchContent);
         return Common.getResponseMap(200, votesList);
     }
 
@@ -88,7 +100,7 @@ public class ThemeController {
 //    }
 
 
-    private void checkSelfThemeAndZeroCount_IfNotThrowException(int tid, HttpSession session) {
+    private Theme checkSelfThemeAndZeroCount_IfNotThrowException(int tid, HttpSession session) {
         Theme oldTheme = themeDAO.getThemeDetailByTid(tid);
 
         if (oldTheme == null) throw new InvalidStatusException("Invaild Tid!");
@@ -97,5 +109,21 @@ public class ThemeController {
                 || oldTheme.getCounts() > 0) {
             throw new InvalidStatusException("Invaild Operation!");
         }
+
+        return oldTheme;
+    }
+
+
+    private void setThemeOnOption(Theme theme) {
+        for (Options options : theme.getOptions()) {
+            options.setTheme(theme);
+        }
+    }
+
+    private void updateThemeOidList(Theme theme) {
+        List oidList = themeDAO.getOidListByTid(theme.getTid());
+        theme.setOid_list(Common.toJsonFromList(oidList));
+
+        themeDAO.updateTheme(theme);
     }
 }

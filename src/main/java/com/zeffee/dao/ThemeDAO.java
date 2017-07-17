@@ -30,13 +30,14 @@ public class ThemeDAO extends BaseDAO {
                 .list();
     }
 
-    public int deleteTheme(int tid) {
-        return getSession().createQuery("delete from Theme where tid=?").setParameter(0, tid).executeUpdate();
+    public void deleteTheme(Theme theme) {
+        getSession().delete(theme);
+        getSession().flush();
     }
-
 
     public void updateTheme(Theme theme) {
         getSession().update(getSession().merge(theme));
+        getSession().flush();
     }
 
 
@@ -49,6 +50,20 @@ public class ThemeDAO extends BaseDAO {
                 .list();
     }
 
+    public List getMyThemeList(String uid, String searchContent) {
+        return getSession()
+                .createSQLQuery("select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid=? union  select tid from votes where uid=?) and match(title, description) against(? IN NATURAL LANGUAGE MODE) ")
+                .setParameter(0, uid)
+                .setParameter(1, uid)
+                .setParameter(2, searchContent)
+                .setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)
+                .list();
+        //select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid='zeffee' union  select tid from votes where uid='zeffee') and match(title, description) against('松下电子' IN NATURAL LANGUAGE MODE)
+        //insert into theme(title) values('芜湖美的厨卫电气制造有限公司'),('北京凡客尚品电子商务有限公司'),('凡客诚品（北京）科技有限公司'),('瞬联讯通科技（北京）有限公司'),('北京畅捷通讯 有限公司'),('北京畅捷通支付技术有限公司'),('畅捷通信息技术股份有限公司'),('北京畅捷科技有限公司'),('中国航天工业科学技术咨询有限公司'),('北京·松下彩色显象管有限公司'),('北京·松下电子部品有限公司'),('北京松下照明光源有限公司'),('松下电气机气（北京）有限公司'),('中新航天科技有限公司'),(' 北京奔驰汽车有限公司'),('阿莫斯特环保科技（北京）有限公司'),('北京低碳清洁能源研究所'),('北京未来科技城开发建设有限 公司'),('北京诺华制药有限公司'),('北京信元电信维护有限责任公司');
+        //select * from theme where match(title,description) against('松下电子' IN NATURAL LANGUAGE MODE);
+    }
+
+
     public Theme getThemeDetailByTid(int tid) {
         return (Theme) getSession().get(Theme.class, tid);
     }
@@ -57,5 +72,21 @@ public class ThemeDAO extends BaseDAO {
         return (boolean) getSession().createSQLQuery("select anonymous from options INNER JOIN theme on options.tid=theme.tid where options.oid=?")
                 .setParameter(0, oid)
                 .uniqueResult();
+    }
+
+
+    public void deleteOptionsByTid(int tid) {
+        getSession().createSQLQuery("delete from options where tid=?")
+                .setParameter(0, tid)
+                .executeUpdate();
+    }
+
+    public int getOptionsCountByTid(int tid) {
+        return Integer.parseInt(
+                getSession().createSQLQuery("select count(*) from options where tid=?")
+                        .setParameter(0, tid)
+                        .uniqueResult()
+                        .toString()
+        );
     }
 }

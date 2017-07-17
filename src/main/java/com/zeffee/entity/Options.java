@@ -1,5 +1,7 @@
 package com.zeffee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -13,14 +15,24 @@ public class Options {
     private int oid;
 
     @Column
-    private int tid;
-
-    @Column
     @NotNull(message = "content is not null!")
     private String content;
 
     @Column(insertable = false, updatable = false)
     private int counts;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "tid", referencedColumnName = "tid")
+    @JsonIgnore
+    private Theme theme;
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
 
     public Options() {
     }
@@ -29,14 +41,6 @@ public class Options {
         this.content = content;
     }
 
-    public int getTid() {
-        return tid;
-    }
-
-    public Options setTid(int tid) {
-        this.tid = tid;
-        return this;
-    }
 
     public int getOid() {
         return oid;

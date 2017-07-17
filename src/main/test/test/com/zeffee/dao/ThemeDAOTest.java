@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -38,6 +35,16 @@ public class ThemeDAOTest extends DaoBaseTest {
         List actual = dao.getMyThemeList(uid);
 
         assertEquals("Theme Data List is not the same between expected and actual", expected.getRowCount(), actual.size());
+    }
+
+    @Test
+    public void testGetMyThemeListBySearchContent() throws DataSetException {
+        String searchContent = "有限公司";
+        String uid = "zeffee";
+        int expectResultCount = 1;
+        int actualCount = dao.getMyThemeList(uid, searchContent).size();
+
+        assertEquals("Search Theme Data List is not the same between expected and actual", expectResultCount, actualCount);
     }
 
     @Test
@@ -66,19 +73,33 @@ public class ThemeDAOTest extends DaoBaseTest {
 
     @Test
     public void testAddTheme() {
-        String title = "test for now";
+        String title = "这是中文";
         Theme theme = new Theme(title, new Date(), new Date(), 5);
+
+        Options newOption = new Options(title + "test for options");
+        newOption.setTheme(theme);
+        Set<Options> set = new HashSet<Options>() {{
+            add(newOption);
+        }};
+        theme.setOptions(set);
+        int exceptOptionCount = 1;
+
         int id = dao.addTheme(theme);
         assertTrue(id > 0);
         assertEquals("That is not the same data between added and actual -- on the add theme", title, dao.getThemeDetailByTid(id).getTitle());
+        assertEquals("That is not the same data between added and actual -- on the add theme", exceptOptionCount, dao.getOptionsCountByTid(id));
+
     }
 
 
     @Test
     public void testDeleteTheme() {
         int tid = 1;
-        dao.deleteTheme(tid);
+        int expectCount = 0;
+
+        dao.deleteTheme(dao.getThemeDetailByTid(tid));
         assertNull("An error occurred when deleting theme", dao.getThemeDetailByTid(tid));
+        assertEquals("An error occurred when deleting theme", expectCount, dao.getOptionsCountByTid(tid));
     }
 
     @Test
@@ -90,8 +111,11 @@ public class ThemeDAOTest extends DaoBaseTest {
 
         Theme theme = dao.getThemeDetailByTid(tid);
         theme.setTitle(title);
+
         Set<Options> options = theme.getOptions();
-        options.add(new Options(newOptionContent));
+        Options newOption = new Options(newOptionContent);
+        newOption.setTheme(theme);
+        options.add(newOption);
 
         dao.updateTheme(theme);
 
@@ -108,5 +132,14 @@ public class ThemeDAOTest extends DaoBaseTest {
         int actualAnonymous = dao.isAnonymousThemeByOid(oid) ? 1 : 0;
 
         assertEquals("getAnonymousByOid went wrong!", expectAnonymous, actualAnonymous);
+    }
+
+    @Test
+    public void testDeleteOptionsByTid() {
+        int tid = 1;
+        int expectedCount = 0;
+        dao.deleteOptionsByTid(tid);
+        int actualCount = dao.getOptionsCountByTid(tid);
+        assertEquals("deleteOptionsByTid went wrong!", expectedCount, actualCount);
     }
 }
