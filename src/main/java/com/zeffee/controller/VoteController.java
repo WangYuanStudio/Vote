@@ -1,10 +1,12 @@
 package com.zeffee.controller;
 
 import com.zeffee.dao.VoteDAO;
+import com.zeffee.entity.Votes;
 import com.zeffee.exception.InvalidStatusException;
 import com.zeffee.exception.ServerException;
 import com.zeffee.lib.Common;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import java.util.Map;
  * Created by Zeffee on 2017/7/15.
  */
 @RestController
+@Transactional
 public class VoteController {
     @Autowired
     private VoteDAO dao;
@@ -27,11 +30,13 @@ public class VoteController {
 
         int tid = (int) params.get("tid");
         List user_vote_oid_list = (List) params.get("oid");
+        String uid = session.getAttribute("openid").toString();
 
-        checkVoted_IfNotThrowException((String) session.getAttribute("openid"), tid);
+        checkVoted_IfNotThrowException(uid, tid);
 
-        //check per vote and oid_list valid
+        // check per vote and oid_list valid
         Map<String, Object> dataMap = dao.getPerVoteAndOidListByTid(tid);
+        if (dataMap == null) return Common.getResponseMap(500, "[tid] is not survivable!");
         int votes_per_user = (byte) dataMap.get("votes_per_user") & 0xFF;
         List theme_oid_list = Common.toListFromJson(dataMap.get("oid_list").toString());
 
@@ -39,7 +44,9 @@ public class VoteController {
                 || !theme_oid_list.containsAll(user_vote_oid_list))
             return Common.getResponseMap(500, "Invaild Operation!");
 
-        incrementOptionCount(user_vote_oid_list);
+
+        saveVoteRecordAndIncrementOptionCount(user_vote_oid_list, tid, uid);
+        dao.incrementThemeCountByTid(tid, 1);
 
         return Common.getResponseMap(200);
     }
@@ -59,8 +66,10 @@ public class VoteController {
         if (vote_record_counts > 0) throw new InvalidStatusException("Have voted already");
     }
 
-    private void incrementOptionCount(List<Integer> oidList) {
+    private void saveVoteRecordAndIncrementOptionCount(List<Integer> oidList, int tid, String uid) {
         for (Integer oid : oidList) {
+            dao.saveVoteRecord(new Votes(uid, oid, tid));
+
             if (1 != dao.incrementOptionCountByOid(oid)) {
                 throw new ServerException("increment option count went wrong! database down?");
             }

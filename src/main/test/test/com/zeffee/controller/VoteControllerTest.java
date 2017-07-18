@@ -30,7 +30,7 @@ public class VoteControllerTest extends ControllerBaseTest {
 
     @Test
     public void testVoteWithCorrectOid() throws Exception {
-        String requestJson = "{\"tid\":1,\"oid\":[2]}";
+        String requestJson = "{\"tid\":1,\"oid\":[1,2]}";
         mockVote(requestJson, RIGHT_STATUS);
     }
 

@@ -1,6 +1,7 @@
 package com.zeffee.dao;
 
 import com.zeffee.entity.Options;
+import com.zeffee.entity.Votes;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 
@@ -30,9 +31,21 @@ public class VoteDAO extends BaseDAO {
         );
     }
 
+
+    public void saveVoteRecord(Votes votes){
+        getSession().save(votes);
+    }
+
     public int incrementOptionCountByOid(int oid) {
         return getSession().createSQLQuery("update options set counts = counts + 1 where oid=?")
                 .setParameter(0, oid)
+                .executeUpdate();
+    }
+
+    public int incrementThemeCountByTid(int tid,int count){
+        return getSession().createSQLQuery("update theme set counts = counts + ? where tid=?")
+                .setParameter(0, count)
+                .setParameter(1, tid)
                 .executeUpdate();
     }
 

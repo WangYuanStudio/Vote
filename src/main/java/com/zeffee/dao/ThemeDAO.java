@@ -69,9 +69,11 @@ public class ThemeDAO extends BaseDAO {
     }
 
     public boolean isAnonymousThemeByOid(int oid) {
-        return (boolean) getSession().createSQLQuery("select anonymous from options INNER JOIN theme on options.tid=theme.tid where options.oid=?")
+        Object result = getSession().createSQLQuery("select anonymous from options INNER JOIN theme on options.tid=theme.tid where options.oid=?")
                 .setParameter(0, oid)
                 .uniqueResult();
+        if (result == null || (boolean) result == false) return false;
+        return true;
     }
 
 

@@ -24,6 +24,14 @@ public class Votes {
     @NotNull(message = "tid is not null!")
     private int tid;
 
+    public Votes() {
+    }
+
+    public Votes(String uid, int oid, int tid) {
+        this.uid = uid;
+        this.oid = oid;
+        this.tid = tid;
+    }
 
     public int getVid() {
         return vid;
