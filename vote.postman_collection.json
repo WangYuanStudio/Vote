@@ -10,7 +10,7 @@
 		{
 			"name": "获取历史纪录",
 			"request": {
-				"url": "http://localhost:8080/getTheme",
+				"url": "https://vote.zeffee.com:8443/getTheme",
 				"method": "GET",
 				"header": [
 					{
@@ -30,7 +30,7 @@
 		{
 			"name": "访问某条投票信息",
 			"request": {
-				"url": "http://localhost:8080/getThemeDetail/2",
+				"url": "https://vote.zeffee.com:8443/getThemeDetail/2",
 				"method": "GET",
 				"header": [
 					{
@@ -50,7 +50,7 @@
 		{
 			"name": "更新投票",
 			"request": {
-				"url": "http://localhost:8080/updateTheme",
+				"url": "https://vote.zeffee.com:8443/updateTheme",
 				"method": "PUT",
 				"header": [
 					{
@@ -71,7 +71,7 @@
 			"name": "搜索并获取历史投票记录",
 			"request": {
 				"url": {
-					"raw": "http://localhost:8080/getMyThemeList.search?content=有限公司",
+					"raw": "https://vote.zeffee.com:8443/getMyThemeList.search?content=有限公司",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -109,7 +109,7 @@
 		{
 			"name": "删除投票",
 			"request": {
-				"url": "http://localhost:8080/deleteTheme/31",
+				"url": "https://vote.zeffee.com:8443/deleteTheme/31",
 				"method": "DELETE",
 				"header": [
 					{
@@ -126,7 +126,7 @@
 		{
 			"name": "添加投票",
 			"request": {
-				"url": "http://localhost:8080/addTheme",
+				"url": "https://vote.zeffee.com:8443/addTheme",
 				"method": "POST",
 				"header": [
 					{
@@ -146,7 +146,7 @@
 		{
 			"name": "检查是否投过票",
 			"request": {
-				"url": "http://localhost:8080/checkVoted/29",
+				"url": "https://vote.zeffee.com:8443/checkVoted/29",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -160,7 +160,7 @@
 		{
 			"name": "投票",
 			"request": {
-				"url": "http://localhost:8080/vote",
+				"url": "https://vote.zeffee.com:8443/vote",
 				"method": "POST",
 				"header": [
 					{
@@ -180,7 +180,7 @@
 		{
 			"name": "获取投该选项的用户列表",
 			"request": {
-				"url": "http://localhost:8080/option/userList/33",
+				"url": "https://vote.zeffee.com:8443/option/userList/33",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -194,7 +194,7 @@
 		{
 			"name": "回滚最初的数据库状态",
 			"request": {
-				"url": "http://localhost:8080/rollback",
+				"url": "https://vote.zeffee.com:8443/rollback",
 				"method": "GET",
 				"header": [],
 				"body": {
