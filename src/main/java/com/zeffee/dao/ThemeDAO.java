@@ -43,7 +43,7 @@ public class ThemeDAO extends BaseDAO {
 
     public List getMyThemeList(String uid) {
         return getSession()
-                .createSQLQuery("select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid=? union  select tid from votes where uid=?)")
+                .createSQLQuery("select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid=?) union select tid,title,start_time,end_time from theme where tid in ( select tid from votes where uid=?)")
                 .setParameter(0, uid)
                 .setParameter(1, uid)
                 .setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)

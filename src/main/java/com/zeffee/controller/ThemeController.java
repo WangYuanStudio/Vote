@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -35,7 +36,9 @@ public class ThemeController {
             return Common.getResponseMap(500, "EndTime needs after StartTime!");
         }
 
+
         theme.setUid(session.getAttribute("openid").toString());
+        escapeHtmlContentToRemoveXSS(theme);
         setThemeOnOption(theme);
         themeDAO.addTheme(theme);
 
@@ -63,6 +66,7 @@ public class ThemeController {
 
         themeDAO.deleteOptionsByTid(theme.getTid());
 
+        escapeHtmlContentToRemoveXSS(theme);
         setThemeOnOption(theme);
         themeDAO.updateTheme(theme);
 
@@ -125,5 +129,13 @@ public class ThemeController {
         theme.setOid_list(Common.toJsonFromList(oidList));
 
         themeDAO.updateTheme(theme);
+    }
+
+    private void escapeHtmlContentToRemoveXSS(Theme theme) {
+        theme.setTitle(HtmlUtils.htmlEscape(theme.getTitle()));
+        theme.setDescription(HtmlUtils.htmlEscape(theme.getDescription()));
+        for (Options options : theme.getOptions()) {
+            options.setContent(HtmlUtils.htmlEscape(options.getContent()));
+        }
     }
 }
