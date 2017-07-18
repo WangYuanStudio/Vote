@@ -1,0 +1,209 @@
+{
+	"variables": [],
+	"info": {
+		"name": "vote",
+		"_postman_id": "c418023b-3c8c-36ac-5789-bcb161288733",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取历史纪录",
+			"request": {
+				"url": "http://localhost:8080/getTheme",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"hello1\",\"start_time\":\"2016-10-01T15:45:30\",\"end_time\":\"2016-10-01T15:45:30\",\"votes_per_user\":3,\"options\":[{\"content\":\"ha1123\"},{\"content\":\"ha22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "访问某条投票信息",
+			"request": {
+				"url": "http://localhost:8080/getThemeDetail/2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"hello1\",\"start_time\":\"2016-10-01T15:45:30\",\"end_time\":\"2016-10-01T15:45:30\",\"votes_per_user\":3,\"options\":[{\"content\":\"ha1123\"},{\"content\":\"ha22334\"}]}"
+				},
+				"description": "打开投票详细页面"
+			},
+			"response": []
+		},
+		{
+			"name": "更新投票",
+			"request": {
+				"url": "http://localhost:8080/updateTheme",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tid\":31,\"title\":\"aaa666666\",\"description\":\"this is description, sizt of that needs between 0 and 100!\",\"start_time\":\"2016-10-01 15:45:30\",\"end_time\":\"2016-10-02 15:45:30\",\"votes_per_user\":3,\"anonymous\":0,\"options\":[{\"content\":\"aa1123\"},{\"content\":\"aa22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "搜索并获取历史投票记录",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/getMyThemeList.search?content=有限公司",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getMyThemeList.search"
+					],
+					"query": [
+						{
+							"key": "content",
+							"value": "有限公司",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"hello1\",\"start_time\":\"2016-10-01T15:45:30\",\"end_time\":\"2016-10-01T15:45:30\",\"votes_per_user\":3,\"options\":[{\"content\":\"ha1123\"},{\"content\":\"ha22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "删除投票",
+			"request": {
+				"url": "http://localhost:8080/deleteTheme/31",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "添加投票",
+			"request": {
+				"url": "http://localhost:8080/addTheme",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"aaa123\",\"description\":\"this is description, sizt of that needs between 0 and 100!\",\"start_time\":\"2016-10-01 15:45:30\",\"end_time\":\"2016-10-02 15:45:30\",\"votes_per_user\":3,\"counts\":1,\"uid\":\"zeffeeff\",\"anonymous\":1,\"options\":[{\"content\":\"aa1123<'a'>\"},{\"content\":\"aa22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "检查是否投过票",
+			"request": {
+				"url": "http://localhost:8080/checkVoted/29",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"hello1\",\"start_time\":\"2016-10-01T15:45:30\",\"end_time\":\"2016-10-01T15:45:30\",\"votes_per_user\":3,\"options\":[{\"content\":\"ha1123\"},{\"content\":\"ha22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "投票",
+			"request": {
+				"url": "http://localhost:8080/vote",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tid\":30,\"oid\":[3,4]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "获取投该选项的用户列表",
+			"request": {
+				"url": "http://localhost:8080/option/userList/33",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"hello1\",\"start_time\":\"2016-10-01T15:45:30\",\"end_time\":\"2016-10-01T15:45:30\",\"votes_per_user\":3,\"options\":[{\"content\":\"ha1123\"},{\"content\":\"ha22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "回滚最初的数据库状态",
+			"request": {
+				"url": "http://localhost:8080/rollback",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"hello1\",\"start_time\":\"2016-10-01T15:45:30\",\"end_time\":\"2016-10-01T15:45:30\",\"votes_per_user\":3,\"options\":[{\"content\":\"ha1123\"},{\"content\":\"ha22334\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
