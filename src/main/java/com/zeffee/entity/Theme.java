@@ -1,6 +1,8 @@
 package com.zeffee.entity;
 
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,54 +19,64 @@ import java.util.Set;
  */
 @Entity
 @DynamicUpdate
+@ApiModel(value = "投票实体")
 public class Theme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "投票项目的id, 发起投票时候可以不用带上, 修改的时候必须带上")
     private int tid;
 
     @Column
     @NotNull(message = "title is not null!")
     @Size(min = 1, max = 50, message = "size of title needs between 1 and 50")
+    @ApiModelProperty(value = "投票标题", allowableValues = "this_is_title", required = true)
     private String title;
 
     @Column
     @Size(max = 200, message = "size of description needs between 0 and 200")
+    @ApiModelProperty(value = "投票说明", allowableValues = "this_is_title")
     private String description;
 
     @Column(name = "start_time")
     @NotNull(message = "startTime is not null!")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "开始时间,格式为 [2018-12-12 16:16:16]", allowableValues = "2018-10-02 16:45:30")
     private Date start_time;
 
     @Column(name = "end_time")
     @NotNull(message = "endTime is not null!")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "结束时间,格式为 [2018-12-12 16:16:16]", allowableValues = "2018-10-02 16:45:30")
     private Date end_time;
 
     @Column(insertable = false, updatable = false)
+    @ApiModelProperty(hidden = true)
     private int counts;
 
     @Column(name = "votes_per_user")
     @NotNull(message = "votes_per_user is not null!")
     @Min(value = 1, message = "votes_per_user needs larger than 1")
     @Max(value = 255, message = "votes_per_user needs larger than 255")
+    @ApiModelProperty(value = "每人投的最大值票数", allowableValues = "3")
     private int votes_per_user;
 
     @Column(name = "uid", updatable = false)
+    @ApiModelProperty(hidden = true)
     private String uid;
 
     @Column(name = "anonymous")
     @Min(value = 0, message = "anonymous need between 0 and 1")
     @Max(value = 1, message = "anonymous need between 0 and 1")
+    @ApiModelProperty(value = "是否匿名， 0或1", allowableValues = "0")
     private int anonymous;
 
     @Column(name = "oid_list", insertable = false)
+    @ApiModelProperty(hidden = true)
     private String oid_list;
 
 
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Options> options;
-
 
     public Set<Options> getOptions() {
         return options;

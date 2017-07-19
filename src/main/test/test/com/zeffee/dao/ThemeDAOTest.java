@@ -29,7 +29,7 @@ public class ThemeDAOTest extends DaoBaseTest {
     public void testGetMyThemeList() throws DataSetException {
         String uid = "zeffee";
         QueryDataSet queryDataSet = new QueryDataSet(conn);
-        queryDataSet.addTable("theme", "select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid='" + uid + "' union  select tid from votes where uid='" + uid + "')");
+        queryDataSet.addTable("theme", "select tid,title,start_time,end_time,photo from theme left join user on theme.uid=user.uid where tid in ( select tid from theme where uid='" + uid + "' union  select tid from votes where uid='" + uid + "')");
         ITable expected = queryDataSet.getTable("theme");
 
         List actual = dao.getMyThemeList(uid);

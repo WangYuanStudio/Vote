@@ -35,7 +35,7 @@ public class VoteControllerTest extends ControllerBaseTest {
     }
 
     private void mockVote(String requestJson, String expectContent) throws Exception {
-        mockMvc.perform(post("/vote").contentType(MediaType.APPLICATION_JSON).content(requestJson).sessionAttr("openid", "zeffee2"))
+        mockMvc.perform(post("/takeVote").contentType(MediaType.APPLICATION_JSON).content(requestJson).sessionAttr("openid", "zeffee2"))
                 .andExpect(isResponseContainSomeContent(expectContent));
     }
 

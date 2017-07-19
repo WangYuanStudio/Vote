@@ -17,8 +17,10 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class DBConfig {
     private static final String DB_NAME = "vote";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+//    private static final String USERNAME = "root";
+//    private static final String PASSWORD = "root";
+    private static final String USERNAME = "vote";
+    private static final String PASSWORD = "Vote!23456";
 
 
     @Bean

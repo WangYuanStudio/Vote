@@ -1,6 +1,7 @@
 package com.zeffee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,13 +13,16 @@ import javax.validation.constraints.NotNull;
 public class Options {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(hidden = true)
     private int oid;
 
     @Column
     @NotNull(message = "content is not null!")
+    @ApiModelProperty(value = "选项的内容", allowableValues = "option_1")
     private String content;
 
     @Column(insertable = false, updatable = false)
+    @ApiModelProperty(hidden = true)
     private int counts;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

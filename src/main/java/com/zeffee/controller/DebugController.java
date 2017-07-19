@@ -1,5 +1,6 @@
 package com.zeffee.controller;
 
+import com.wordnik.swagger.annotations.ApiOperation;
 import com.zeffee.config.DBConfig;
 import com.zeffee.lib.Common;
 import org.dbunit.DatabaseUnitException;
@@ -26,7 +27,10 @@ import java.util.Map;
 @RestController
 @Transactional
 public class DebugController {
+
+
     @RequestMapping(value = "/rollback", method = RequestMethod.GET)
+    @ApiOperation(value = "回滚数据库", notes = "回到最初的状态")
     public Map<String, Object> rollbackDb() throws DatabaseUnitException, IOException, SQLException, URISyntaxException {
         IDatabaseConnection conn = new DatabaseConnection(DataSourceUtils.getConnection(new DBConfig().dataSource()));
 

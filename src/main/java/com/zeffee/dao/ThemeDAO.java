@@ -43,7 +43,7 @@ public class ThemeDAO extends BaseDAO {
 
     public List getMyThemeList(String uid) {
         return getSession()
-                .createSQLQuery("select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid=?) union select tid,title,start_time,end_time from theme where tid in ( select tid from votes where uid=?)")
+                .createSQLQuery("select tid,title,start_time,end_time,photo from theme left join user on theme.uid=user.uid where tid in ( select tid from theme where uid=?) union select tid,title,start_time,end_time,photo from theme left join user on theme.uid=user.uid where tid in ( select tid from votes where uid=?)")
                 .setParameter(0, uid)
                 .setParameter(1, uid)
                 .setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)
@@ -52,7 +52,7 @@ public class ThemeDAO extends BaseDAO {
 
     public List getMyThemeList(String uid, String searchContent) {
         return getSession()
-                .createSQLQuery("select tid,title,start_time,end_time from theme where tid in ( select tid from theme where uid=? union  select tid from votes where uid=?) and match(title, description) against(? IN NATURAL LANGUAGE MODE) ")
+                .createSQLQuery("select tid,title,start_time,end_time,photo from theme left join user on theme.uid=user.uid where tid in ( select tid from theme where uid=? union  select tid from votes where uid=?) and match(title, description) against(? IN NATURAL LANGUAGE MODE) ")
                 .setParameter(0, uid)
                 .setParameter(1, uid)
                 .setParameter(2, searchContent)

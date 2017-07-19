@@ -1,7 +1,9 @@
 package com.zeffee.dao;
 
+import com.zeffee.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,5 +15,10 @@ public class UserDAO extends BaseDAO {
         return getSession().createSQLQuery("select name from votes INNER join user on user.uid=votes.uid where oid=?")
                 .setParameter(0, oid)
                 .list();
+    }
+
+    public void updateUserInfo(User user) {
+        getSession().saveOrUpdate(user);
+        getSession().flush();
     }
 }

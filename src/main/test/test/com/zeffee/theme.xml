@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <theme tid="1" title="title123" description="shit" start_time="2017-06-13 00:30:00" end_time="2017-06-13 01:00:00" counts="0" votes_per_user="2" anonymous="0" uid="zeffee" oid_list="[1,2]"/>
+    <theme tid="1" title="title123" description="shit" start_time="2017-06-13 00:30:00" end_time="2027-06-13 01:00:00" counts="0" votes_per_user="2" anonymous="0" uid="zeffee" oid_list="[1,2]"/>
     <theme tid="2" title="title1236789" start_time="2017-06-13 02:00:00" end_time="2017-06-13 04:00:00" counts="320" votes_per_user="3" anonymous="0" uid="zeffee"/>
     <theme tid="3" title="title1236789777" start_time="2017-06-13 12:00:00" end_time="2017-06-13 14:00:00" counts="333" votes_per_user="3" anonymous="0" uid="self"/>
     <theme tid="4" title="hello" start_time="2017-05-30 00:00:00.0" end_time="2017-07-30 00:00:00.0" counts="0" votes_per_user="0" anonymous="false"/>
@@ -42,5 +42,5 @@
     <votes vid="1" uid="zeffee" oid="1" tid="1"/>
     <votes vid="2" uid="zeffee" oid="2" tid="1"/>
 
-    <user uid="zeffee" name="zeffee chan"/>
+    <user uid="zeffee" name="zeffee chan" photo="url"/>
 </dataset>

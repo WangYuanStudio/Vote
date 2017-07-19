@@ -14,8 +14,8 @@ import java.util.Map;
 @Repository
 public class VoteDAO extends BaseDAO {
 
-    public Map<String, Object> getPerVoteAndOidListByTid(int tid) {
-        return (Map<String, Object>) getSession().createSQLQuery("select votes_per_user,oid_list from theme where tid=?")
+    public Map<String, Object> getTime_PerVote_OidListByTid(int tid) {
+        return (Map<String, Object>) getSession().createSQLQuery("select start_time,end_time,votes_per_user,oid_list from theme where tid=?")
                 .setParameter(0, tid)
                 .setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)
                 .uniqueResult();

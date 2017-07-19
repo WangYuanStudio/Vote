@@ -33,11 +33,11 @@ public class VoteDAOTest extends DaoBaseTest {
     }
 
     @Test
-    public void testGetPerVoteAndOidListByTid() {
+    public void testGetTime_PerVote_OidListByTid() {
         int tid = 1;
         int votes_per_user = 2;
         String oid_list = "[1,2]";
-        Map<String, Object> dataMap = dao.getPerVoteAndOidListByTid(tid);
+        Map<String, Object> dataMap = dao.getTime_PerVote_OidListByTid(tid);
 
         assertEquals("getPerVoteAndOidListByTid went wrong! Not the same data!", votes_per_user, (byte) dataMap.get("votes_per_user") & 0xFF);
         assertEquals("getPerVoteAndOidListByTid went wrong! Not the same data!", oid_list, dataMap.get("oid_list"));

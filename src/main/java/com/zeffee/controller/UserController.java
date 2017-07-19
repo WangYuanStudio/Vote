@@ -1,5 +1,7 @@
 package com.zeffee.controller;
 
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import com.zeffee.dao.ThemeDAO;
 import com.zeffee.dao.UserDAO;
 import com.zeffee.lib.Common;
@@ -25,8 +27,9 @@ public class UserController {
     @Autowired
     private UserDAO userDAO;
 
+    @ApiOperation(value = "获取投该选项的用户列表")
     @RequestMapping(value = "/option/userList/{oid}", method = RequestMethod.GET)
-    public Map<String, Object> getUserListByOid(@PathVariable(value = "oid") int oid) {
+    public Map<String, Object> getUserListByOid(@ApiParam(value = "选项的id", defaultValue = "33") @PathVariable(value = "oid") int oid) {
         if (themeDAO.isAnonymousThemeByOid(oid)) return Common.getResponseMap(500, "The theme is anonymous");
 
         List userList = userDAO.getUserNameListByOid(oid);
