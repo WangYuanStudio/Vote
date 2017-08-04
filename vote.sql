@@ -29,7 +29,7 @@ CREATE TABLE `options` (
   `counts` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`oid`),
   KEY `options_tid` (`tid`)
-) ENGINE=MyISAM AUTO_INCREMENT=171 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=274 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `theme` (
   PRIMARY KEY (`tid`),
   KEY `uid` (`uid`),
   FULLTEXT KEY `search` (`title`,`description`) /*!50100 WITH PARSER `ngram` */ 
-) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,14 +109,12 @@ DROP TABLE IF EXISTS `votes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `votes` (
-  `vid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` char(28) NOT NULL,
   `oid` int(10) unsigned NOT NULL,
   `tid` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`vid`),
-  KEY `show_my_vote` (`uid`,`tid`),
-  KEY `oid` (`oid`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`uid`,`oid`),
+  KEY `tid` (`tid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +123,7 @@ CREATE TABLE `votes` (
 
 LOCK TABLES `votes` WRITE;
 /*!40000 ALTER TABLE `votes` DISABLE KEYS */;
-INSERT INTO `votes` VALUES (3,'zeffee',33,29),(4,'zeffee',66,29);
+INSERT INTO `votes` VALUES ('zeffee',33,29),('zeffee',66,29);
 /*!40000 ALTER TABLE `votes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -138,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-19 21:43:12
+-- Dump completed on 2017-08-04 16:23:56
