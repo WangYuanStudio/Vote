@@ -2,6 +2,7 @@ package com.zeffee.exception;
 
 import com.zeffee.lib.Common;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +18,13 @@ public class UserExceptionHandler {
     @ExceptionHandler(InvalidStatusException.class)
     @ResponseBody
     public Map<String, Object> invalidUserStatus(InvalidStatusException e) {
+        return Common.getResponseMap(500, e.getMessage());
+    }
+
+    // Duplicate key on the votes record
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseBody
+    public Map<String, Object> constraintViolationException(ConstraintViolationException e) {
         return Common.getResponseMap(500, e.getMessage());
     }
 

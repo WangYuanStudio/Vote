@@ -1,62 +1,37 @@
 package com.zeffee.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Created by zeffee on 2017/6/2.
  */
 @Entity
-public class Votes {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int vid;
+public class Votes implements Serializable {
+    private static final long serialVersionUID = 2L;
 
-    @Column
-    @NotNull(message = "uid is not null!")
-    private String uid;
-
-    @Column
-    @NotNull(message = "oid is not null!")
-    private int oid;
+    @EmbeddedId
+    private VotesPrimaryKey primary;
 
     @Column
     @NotNull(message = "tid is not null!")
     private int tid;
 
+
     public Votes() {
     }
 
-    public Votes(String uid, int oid, int tid) {
-        this.uid = uid;
-        this.oid = oid;
+    public Votes(VotesPrimaryKey primary, int tid) {
+        this.primary = primary;
         this.tid = tid;
     }
 
-    public int getVid() {
-        return vid;
-    }
-
-    public Votes setVid(int vid) {
-        this.vid = vid;
-        return this;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public int getOid() {
-        return oid;
-    }
-
-    public Votes setOid(int oid) {
-        this.oid = oid;
-        return this;
+    public Votes(String uid, int oid, int tid) {
+        this.primary = new VotesPrimaryKey(uid, oid);
+        this.tid = tid;
     }
 
     public int getTid() {
@@ -65,6 +40,23 @@ public class Votes {
 
     public Votes setTid(int tid) {
         this.tid = tid;
+        return this;
+    }
+
+    public String getUid() {
+        return primary.getUid();
+    }
+
+    public void setUid(String uid) {
+        primary.setUid(uid);
+    }
+
+    public int getOid() {
+        return primary.getOid();
+    }
+
+    public Votes setOid(int oid) {
+        primary.setOid(oid);
         return this;
     }
 }

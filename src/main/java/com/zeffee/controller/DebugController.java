@@ -30,7 +30,7 @@ public class DebugController {
 
 
     @RequestMapping(value = "/rollback", method = RequestMethod.GET)
-    @ApiOperation(value = "回滚数据库", notes = "回到最初的状态")
+    @ApiOperation(value = "回滚数据库")
     public Map<String, Object> rollbackDb() throws DatabaseUnitException, IOException, SQLException, URISyntaxException {
         IDatabaseConnection conn = new DatabaseConnection(DataSourceUtils.getConnection(new DBConfig().dataSource()));
 

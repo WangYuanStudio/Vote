@@ -64,6 +64,6 @@
   <theme tid="65" title="aaa1" description="&#21271;&#20140;&#20961;&#23458;&#23578;&#21697;&#30005;&#23376;&#21830;&#21153;&#26377;&#38480;&#20844;&#21496;" start_time="2016-10-01 15:45:30.0" end_time="2016-10-02 15:45:30.0" counts="0" votes_per_user="3" uid="z" anonymous="true"/>
   <theme tid="66" title="aaa1" description="&#33436;&#28246;&#32654;&#30340;&#21416;&#21355;&#30005;&#27668;&#21046;&#36896;&#26377;&#38480;&#20844;&#21496;" start_time="2016-10-01 15:45:30.0" end_time="2016-10-02 15:45:30.0" counts="0" votes_per_user="3" uid="z" anonymous="true"/>
   <user uid="zeffee" name="zeffee chan" photo="http://wx.qlogo.cn/mmhead/Mjzdia7evAzwzxichrTjAEwK7BLII2YIfMRiaMudFpyWM9yoNFOaH9KTA/0"/>
-  <votes vid="3" uid="zeffee" oid="33" tid="29"/>
-  <votes vid="4" uid="zeffee" oid="66" tid="29"/>
+  <votes uid="zeffee" oid="33" tid="29"/>
+  <votes uid="zeffee" oid="66" tid="29"/>
 </dataset>

@@ -2,7 +2,7 @@ package test.com.zeffee.controller;
 
 import org.junit.Test;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 /**
  * Created by Zeffee on 2017/7/16.

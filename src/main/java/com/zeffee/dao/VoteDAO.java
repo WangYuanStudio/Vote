@@ -21,7 +21,7 @@ public class VoteDAO extends BaseDAO {
                 .uniqueResult();
     }
 
-    public int getSelfVoteRecordByTid(String uid, int tid) {
+    public int getSelfVoteRecordCountByTid(String uid, int tid) {
         return Integer.parseInt(
                 getSession().createSQLQuery("select count(*) from votes where uid=? AND tid=?")
                         .setParameter(0, uid)
@@ -31,9 +31,17 @@ public class VoteDAO extends BaseDAO {
         );
     }
 
+    public List getSelfVoteRecordByTid(String uid, int tid) {
+        return getSession().createSQLQuery("select oid from votes where uid=? AND tid=?")
+                .setParameter(0, uid)
+                .setParameter(1, tid)
+                .list();
+    }
 
-    public void saveVoteRecord(Votes votes){
+
+    public void saveVoteRecord(Votes votes) {
         getSession().save(votes);
+        getSession().flush();
     }
 
     public int incrementOptionCountByOid(int oid) {
@@ -42,7 +50,7 @@ public class VoteDAO extends BaseDAO {
                 .executeUpdate();
     }
 
-    public int incrementThemeCountByTid(int tid,int count){
+    public int incrementThemeCountByTid(int tid, int count) {
         return getSession().createSQLQuery("update theme set counts = counts + ? where tid=?")
                 .setParameter(0, count)
                 .setParameter(1, tid)

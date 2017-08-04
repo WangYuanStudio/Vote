@@ -54,6 +54,8 @@ public class VoteController {
         if (user_vote_oid_list.size() > votes_per_user) return Common.getResponseMap(500, "Invaild Vote Size!");
         if (!theme_oid_list.containsAll(user_vote_oid_list)) return Common.getResponseMap(500, "Invaild OidList!");
 
+        // Debug now
+        //uid = "debug_" + (Math.random() * 10000);
 
         saveVoteRecordAndIncrementOptionCount(user_vote_oid_list, tid, uid);
         dao.incrementThemeCountByTid(tid, 1);
@@ -69,11 +71,18 @@ public class VoteController {
         return Common.getResponseMap(200);
     }
 
+    @ApiOperation(value = "获取自己的投票信息(返回投了哪个选项)")
+    @RequestMapping(value = "/vote/self_record/{tid}", method = RequestMethod.GET)
+    public Map<String, Object> getVoteRecordByTid(@ApiParam(value = "投票项目的tid", defaultValue = "29") @PathVariable(value = "tid") int tid) {
+        List voteRecords = dao.getSelfVoteRecordByTid((String) session.getAttribute("openid"), tid);
+        return Common.getResponseMap(200, voteRecords);
+    }
+
 
     //======= Function =======
 
     private void checkVoted_IfNotThrowException(String uid, int tid) {
-        int vote_record_counts = dao.getSelfVoteRecordByTid(uid, tid);
+        int vote_record_counts = dao.getSelfVoteRecordCountByTid(uid, tid);
         if (vote_record_counts > 0) throw new InvalidStatusException("Have voted already");
     }
 

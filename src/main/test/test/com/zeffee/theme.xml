@@ -39,8 +39,8 @@
     <options oid="1" tid="1" content="shitter options 1" counts="3"/>
     <options oid="2" tid="1" content="shitter options 2" counts="2"/>
 
-    <votes vid="1" uid="zeffee" oid="1" tid="1"/>
-    <votes vid="2" uid="zeffee" oid="2" tid="1"/>
+    <votes uid="zeffee" oid="1" tid="1"/>
+    <votes uid="zeffee" oid="2" tid="1"/>
 
     <user uid="zeffee" name="zeffee chan" photo="url"/>
 </dataset>

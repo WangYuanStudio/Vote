@@ -6,6 +6,8 @@ import com.zeffee.entity.Votes;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -23,13 +25,26 @@ public class VoteDAOTest extends DaoBaseTest {
     private final static int VOTE_SIZE = 2;
 
     @Test
-    public void testGetSelfVoteRecordByTid() {
+    public void testGetSelfVoteRecordCountByTid() {
         int tid = 1;
         String uid = "zeffee";
         int expectCount = 2;
-        int actualCount = dao.getSelfVoteRecordByTid(uid, tid);
+        int actualCount = dao.getSelfVoteRecordCountByTid(uid, tid);
 
-        assertEquals("getSelfVoteRecordByTid went wrong! Not the same data!", expectCount, actualCount);
+        assertEquals("getSelfVoteRecordCountByTid went wrong! Not the same data!", expectCount, actualCount);
+    }
+
+    @Test
+    public void testGetSelfVoteRecordByTid() {
+        int tid = 1;
+        String uid = "zeffee";
+        List expect = new ArrayList() {{
+            add(1);
+            add(2);
+        }};
+        List actual = dao.getSelfVoteRecordByTid(uid, tid);
+
+        assertEquals("getSelfVoteRecordByTid went wrong! Not the same data!", expect, actual);
     }
 
     @Test
@@ -72,9 +87,20 @@ public class VoteDAOTest extends DaoBaseTest {
 
     @Test
     public void testSaveVoteRecord() {
-        int tid = 1;
+        int oid = 3;
+        int oid2 = 4;
+        saveVoteRecordCommon(oid, oid2);
+    }
+
+    @Test(expected = org.hibernate.exception.ConstraintViolationException.class)
+    public void testSaveVoteRecordByDuplicateOid() {
         int oid = 1;
         int oid2 = 2;
+        saveVoteRecordCommon(oid, oid2);
+    }
+
+    private void saveVoteRecordCommon(int oid, int oid2) {
+        int tid = 1;
         String uid = "zeffee";
 
         Votes votes1 = new Votes(uid, oid, tid);
@@ -83,10 +109,9 @@ public class VoteDAOTest extends DaoBaseTest {
         dao.saveVoteRecord(votes2);
 
         int expectCount = VOTE_SIZE + 2;
-        int actualCount = dao.getSelfVoteRecordByTid(uid, tid);
+        int actualCount = dao.getSelfVoteRecordCountByTid(uid, tid);
 
         assertEquals("saveVoteRecord went wrong! can't save the vote record!", expectCount, actualCount);
     }
-
 
 }
