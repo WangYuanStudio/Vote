@@ -1,0 +1,193 @@
+*{
+	padding:0px;
+	margin: 0px;
+	font-size: 1.1rem;
+	color: #454545;
+}
+
+body{
+	width: 100%;
+	min-height: 100vh;
+	background-color: #eeeeee;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	font-family: 微软雅黑;
+}
+
+.container{
+	min-height: 100vh;
+	width: 100%;
+	position: relative;
+}
+
+.container .vote_text_container{
+	width: 100%;
+	background-color: #ffffff;
+	margin-bottom: .8rem;
+}
+.container .nav{
+	height: 50px;
+	margin-bottom: 5px;
+	box-shadow: 0rem 0.1rem 0.5rem 0.005rem rgba(0,0,0,.3);
+	text-align: center;
+	z-index: 999;
+	position: fixed;
+	top: 0px;
+}
+.container .nav img{
+	width: 5rem;
+	margin-top: 15px;
+}
+.container .top{
+	margin-top: 55px;
+}
+.container .vote_text_container .tpjg_title{
+	font-size: 1.5rem;
+	padding:0.6rem 0 0.8rem 0;
+	width: calc(100% - 1.0rem);
+	color: #0685cc;
+	font-family: 微软雅黑;
+	margin-left: 1.0rem;
+}
+.container .vote_text_container .tpjg_title .tpjg_title_text{
+	font-family: 微软雅黑;
+	font-size: 1.5rem;
+	color: #0685cc;
+}
+.container .vote_text_container .tpjg_title .daojishi{
+	font-family: 微软雅黑;
+	font-size: 1.5rem;
+	color: #bfbfbf;
+}
+.container .vote_text_container .tgjg_text{
+	font-size: 1.1rem;
+	color: #454545;
+	font-family: 微软雅黑;
+	padding:0rem 0 0.8rem 0;
+	width: calc(100% - 1.0rem);
+	margin-left: 1.0rem;
+	word-wrap : break-word;
+}
+.container .vote_text_container .sxnav{
+	padding:36px 0 0.8rem 0.8rem;
+	width: calc(100% - 1.0rem);
+	margin:0 auto;
+	height: 3.5rem;
+}
+.container .vote_text_container .sxnav .sxpaixu{
+	float: left;
+	height: 3.2rem;
+	border:2px solid #056aa3;
+	border-left:3px solid #056aa3;
+	border-right:2px solid #056aa3;
+	text-align: center;
+	width: calc(50% - 0.5rem);
+	line-height: 3.2rem;
+	color: #454545;
+	font-size: 1.1rem;
+}
+.container .vote_text_container .sxnav .sxchoice{
+	border:1px solid #056aa3;
+	background-color: #0685cc;
+	color: #ffffff;
+	height: 3.3rem;
+	line-height: 3.3rem;
+}
+.container .vote_text_container .sxnav .sxpaixu:first-child{
+	border-bottom-left-radius: 8px;
+	border-top-left-radius: 8px;
+}
+.container .vote_text_container .sxnav .sxpaixu:last-child{
+	border-bottom-right-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.container .vote_text_container .xuanxiangsoncontainer{
+	font-size: 1.1rem;
+	font-family: 微软雅黑;
+	color: #454545;
+	padding:0 0.5rem;
+	width: calc(100% - 1.0rem);
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson{
+	padding-top: .8rem;
+	position: relative;
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xianshizhanbi{
+	width: calc(100% - 3.8rem);
+	height: 2.2rem;
+	background-color: #eeeeee;
+	border-left: 0 solid #bfbfbf;
+	margin: 17px 3.8rem 0 0;
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xianshizhanbi2{
+	border-color:#0685cc;
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct{
+	position: absolute;
+	font-size: 4.4rem;
+	right: .5rem;
+	top: 0rem;
+	cursor: pointer;
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct .ic{
+	transform: rotate(180deg);
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct_word{
+	margin-top: .9rem;
+	color: #bfbfbf;
+	font-size: .9rem;
+	display: none;
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct img{
+	width: 2.2rem;
+}
+.container .vote_text_container .xuanxiangsoncontainer .piaoshuc{
+	color: #bfbfbf;
+}
+.container .vote_text_container .xuanxiangsoncontainer .piaoshuN{
+	color: #bfbfbf;
+}
+.container .vote_text_container .howmanychice{
+	font-family: 微软雅黑;
+	color: #454545;
+	padding:.45rem .5rem 0 1rem;
+	width: calc(100% - 1.5rem);
+	font-size: .9rem;
+	color: #bfbfbf;
+}
+.container .vote_text_container .jiezhishijian{
+	padding-bottom: 18px;
+}
+button{
+	height: 3.5rem;
+	border:.2rem solid #056aa3;
+	width: 91%;
+	outline: 0px;
+	font-size: 1.4rem;
+	color: #454545;
+	background-color: inherit;
+	border-radius: 16px;
+	margin: 0 4% 1.6rem 4%;
+}
+button:active{
+	background-color: #bebebe;
+	color: #454545;
+}
+.fuzhi{
+	margin-top: 42px;
+}
+.create{
+	margin-bottom: 90px;
+}
+::-webkit-input-placeholder{color:#bfbfbf;}
+::-moz-placeholder{color:#bfbfbf;}
+:-moz-placeholder{color:#bfbfbf;}
+
+.copyright{
+	position: absolute;
+	bottom: 18px;
+	text-align: center;
+	width: 100%;
+}
