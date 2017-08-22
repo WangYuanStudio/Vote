@@ -54,6 +54,7 @@ body{
 	font-family: 微软雅黑;
 	font-size: 1.5rem;
 	color: #0685cc;
+	word-wrap: break-word;
 }
 .container .vote_text_container .tpjg_title .daojishi{
 	font-family: 微软雅黑;
@@ -112,7 +113,10 @@ body{
 }
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson{
 	padding-top: .8rem;
-	position: relative;
+}
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xuanxiangsontitle{
+	width: 100%;
+	word-wrap: break-word;
 }
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xianshizhanbi{
 	width: calc(100% - 3.8rem);
@@ -124,12 +128,17 @@ body{
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xianshizhanbi2{
 	border-color:#0685cc;
 }
+.container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xs{
+	position: relative;
+}
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct{
 	position: absolute;
 	font-size: 4.4rem;
 	right: .5rem;
-	top: 0rem;
+	top: 0px;
 	cursor: pointer;
+	height: 22px;
+	line-height: 0;
 }
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct .ic{
 	transform: rotate(180deg);
