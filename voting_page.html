@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>主页</title>
+	<link rel="stylesheet" type="text/css" href="style/voting_page.css">
+	<link rel="stylesheet" href="./weui.css">
+	<meta charset="utf-8">
+	<script type="text/javascript" src="script/zepto.min.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+	<div class="page">
+		<nav>
+			<img src="img/logo.png">
+		</nav>
+		<div class="voting_explain">
+			<p class="title" id="title"><span id="state">(进行中)</span></p>
+			<p class="main" id="main"></p>
+			<p class="supplement">（说明：投票结果于投票后可见。）</p>
+		</div>
+		<div class="voting_select" id="voting_select">
+		</div>
+		<div class="voting_select_explain">
+			<p>（投票截止时间：<span id="end_time"></span>）</p>
+		</div>
+		<div class="voting_button voting_button_1" id="voting_button_1">
+			投票
+		</div>
+		<p class="explain" id="explain"></p>
+	</div>
+	<p class="copyright">copyright@</p>
+</body>
+<script type="text/javascript" src="script/voting_page.js"></script>
+</html>
