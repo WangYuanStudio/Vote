@@ -3,10 +3,54 @@ parameter=url.split("/");
 parameter=parameter[parameter.length-1].split("#");
 tid=parameter[0];
 url="https://vote.zeffee.com:8443/getThemeDetail/"+tid;
+parameter[0]="none";
 var votes_per_user;
 $.get(url,function(data){
 	data = JSON.stringify(data);
 	var data = eval("("+data+")");
+	if(!data)
+	{
+		return;
+	}
+	if(data.data.counts)
+	{
+		document.getElementById("voting_button_3").style.backgroundColor="#ba3a3b";
+		document.getElementById("voting_button_2").style.color="#c0c0c0";
+		document.getElementById("voting_button_3").style.color="#fffeff";
+	}
+	else
+	{
+		$("#voting_button_2").on("touchstart",function(){
+			document.getElementById("voting_button_2").style.backgroundColor="#bebebe";
+		});
+		$("#voting_button_2").on("touchend",function(){
+			document.getElementById("voting_button_2").style.backgroundColor="";
+		});
+		$("#voting_button_3").on("touchstart",function(){
+			document.getElementById("voting_button_3").style.backgroundColor="#ba3a3b";
+		});
+		$("#voting_button_3").on("touchend",function(){
+			document.getElementById("voting_button_3").style.backgroundColor="#e84848";
+		});
+		$("#voting_button_3").on("click",function(){
+			var con=confirm("你确认要删除吗?"); 
+			if(con==true)
+			{
+				$.ajax({
+				        type: "DELETE",
+				        url: "https://vote.zeffee.com:8443/deleteTheme/"+tid,
+				        contentType: "application/json; charset=utf-8",
+				        dataType: "json",
+				        success: function (message) {
+				        	
+				        },
+				        error: function (message) {
+				            
+				        }
+				    });
+			}
+		});
+	}
 	if(data.data.start_time>new Date())
 	{
 		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
@@ -36,14 +80,7 @@ $.get(url,function(data){
 		newevent=document.createElement("div");
 		newevent.setAttribute("class", "select_son");
 		newevent.setAttribute("oid", data.data.options[options]["oid"]);
-		if(contains(parameter,data.data.options[options]["oid"].toString()))
-		{
-			newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span><span class='sharer'>("+parameter[1]+"投此项)</span>";
-		}
-		else
-		{
-			newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span>";
-		}
+		newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span>";
 		allevent.appendChild(newevent);
 		options++;
 	}
@@ -67,6 +104,7 @@ $.get(url,function(data){
 		{
 			if($(this).children('img').attr("src").match("1"))
 			{
+				
 				if($("#voting_select .select_son_s").length==votes_per_user)
 				{
 					return;
@@ -114,13 +152,15 @@ $.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
 					        data: JSON.stringify(GetJsonData()),
 					        dataType: "json",
 					        success: function (message) {
-					        	console.log(message)
+					        	console.log(message);
+					        	window.location = "";
 					        },
 					        error: function (message) {
 					            
 					        }
-					    });
+					});
 				}
+				
 			});
 		}
 	});
@@ -136,15 +176,5 @@ function GetJsonData() {
         "tid": tid,
         "oid":oid
     };
-    console.log(json);
     return json;
 }
-function contains(arr, obj) {  
-    var i = arr.length;  
-    while (i--) {  
-        if (arr[i] === obj) {  
-            return true;  
-        }  
-    }  
-    return false;  
-}  
