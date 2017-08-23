@@ -1,0 +1,180 @@
+*
+{
+	font-size: 1.1rem;
+	color: #454545;
+}
+body
+{
+	background-color: #eeeeee;
+	min-height: 100vh;
+	margin: 0;
+}
+.page
+{
+	position: relative;
+	min-height: calc(100vh - 0.8rem - 10px);
+}
+nav
+{
+	z-index: 5000;
+	height: 50px;
+	box-shadow: 0rem 0.1rem 0.5rem 0.005rem rgba(0,0,0,.3);
+	background-color: #fff;
+	text-align: center;
+	margin-bottom: 5px;
+}
+nav img
+{
+	width: 5rem;
+	margin-top: 15px;
+}
+.voting_explain
+{
+	position: relative;
+	background-color: #fff;
+	padding: 0 4%;
+}
+.voting_explain .title
+{
+	color: #0685cc;
+	margin: 0;
+	padding: 20px 0 14px 0;
+	font-size: 1.5rem;
+	word-wrap:break-word; 
+	word-break:normal;
+}
+.voting_explain .main
+{
+	word-wrap:break-word; 
+	word-break:normal;
+	margin: 0;
+	line-height: 1.5rem;
+}
+.voting_explain .supplement
+{
+	margin: 0;
+	padding: 0 0 24px 0;
+}
+.voting_explain .title span
+{
+	color: #bfbfbf;
+	font-size: 0.9rem;
+}
+.voting_select
+{
+	position: relative;
+	background-color: #fff;
+	margin-top: 18px;
+	padding: 20px 4% 10px 4%;
+}
+.voting_select .select_son
+{
+	height: 2rem;
+	line-height: 2rem;
+	padding: 10px 0;
+}
+.voting_select .select_son_s
+{
+	height: 2rem;
+	line-height: 2rem;
+	padding: 10px 0;
+}
+.voting_select .select_son_s img
+{
+	float: left;
+	height: 2rem;
+	padding-right: 20px;
+}
+.voting_select .select_son_s span
+{
+	float: left;
+	font-size: 1.5rem;
+}
+.voting_select .select_son_s .sharer
+{
+	font-size: 1rem;
+	color: #bfbfbf;
+}
+.voting_select .select_son img
+{
+	float: left;
+	height: 2rem;
+	padding-right: 20px;
+}
+.voting_select .select_son span
+{
+	float: left;
+	font-size: 1.5rem;
+}
+.voting_select .select_son .sharer
+{
+	font-size: 1rem;
+	color: #bfbfbf;
+}
+.voting_select_explain
+{
+	position: relative;
+	background-color: #fff;
+	padding: 0 4% 20px 4%;
+}
+.voting_select_explain p
+{
+	color: #bfbfbf;
+	font-size: 1rem;
+	margin: 0;
+}
+.voting_select_explain p span
+{
+	color: #bfbfbf;
+	font-size: 1rem;
+}
+.voting_button
+{
+	position: relative;
+	height: 3.5rem;
+	width: 91%;
+	text-align: center;
+	line-height: 3.5rem;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	font-size: 1.4rem;
+}
+.voting_button_1
+{
+	color: #fff;
+	margin: 60px auto 0 auto;
+	background-color: #0685cc;
+	border: 1px solid #056aa3;
+}
+.voting_button_2
+{
+	color: #454545;
+	margin: 20px auto 0 auto;
+	border: 1px solid #056aa3;
+}
+.voting_button_3
+{
+	color: #fff;
+	margin: 20px auto 0 auto;
+	background-color: #e74848;
+	border: 1px solid #b93a3a;
+}
+.explain
+{
+	position: relative;
+	margin: 0 auto;
+	color: #bfbfbf;
+	font-size: 0.8rem;
+	padding: 10px 0 14px 0 ; 
+	text-align: center;
+}
+.copyright
+{
+	position: relative;
+	margin: 0 auto;
+	color: #bfbfbf;
+	font-size: 0.8rem;
+	text-align: center;
+}
