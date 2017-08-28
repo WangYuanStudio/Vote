@@ -21,7 +21,7 @@
             defaultValue: $('input').length-1,
         });
     });
-		var newinput='<div class="xuanxiangcontainer"><img src="image/js.svg" class="jianshao"/><input type="text" placeholder="选项描述"></div>'
+		var newinput='<div class="xuanxiangcontainer"><img src="img/js.svg" class="jianshao"/><input type="text" placeholder="选项描述"></div>'
 		var shijian={
 			removeinput : function(event){
 				if ($('.jianshao').length<=2) {
@@ -47,12 +47,12 @@
 
 
 		$('.duoxuan').find('img').on('click',function(){
-			if($(this).attr('src')=="image/dx1.svg"){
-				$(this).attr('src',"image/dx2.svg");
+			if($(this).attr('src')=="img/dx1.svg"){
+				$(this).attr('src',"img/dx2.svg");
 				$('.kexuangeshu').css('display','block');
                 $('.snaume').text(2);
 			}else{
-				$(this).attr('src',"image/dx1.svg");
+				$(this).attr('src',"img/dx1.svg");
 				$('.kexuangeshu').css('display','none');
                 $('.snaume').text(1);
 			}
@@ -60,11 +60,11 @@
 
         var ifniming=0;
 		$('.niming').find('img').on('click',function(){
-			if($(this).attr('src')=="image/dx1.svg"){
-				$(this).attr('src',"image/dx2.svg");
+			if($(this).attr('src')=="img/dx1.svg"){
+				$(this).attr('src',"img/dx2.svg");
                 ifniming=1;
 			}else{
-				$(this).attr('src',"image/dx1.svg");
+				$(this).attr('src',"img/dx1.svg");
                 ifniming=0;
 			}
 		})

@@ -109,16 +109,16 @@ function xxpaixu(){
     function addxuanxiang(xuangxiangname,piaoshu,oid){
         tprsrm(oid);
         if (tprs1) {
-            var xuanxiang='<div class="xuanxiangson"'+'oid='+oid+'><div class="xuanxiangsontitle"><span class="xuanxiangname">'+xuangxiangname+'</span><span class="piaoshuc">(<span class="piaoshuN">'+piaoshu+'</span>票)</span></div><div class="xs"><div class="xianshizhanbi"></div><div class="hmpct"><img src="image/ckrs.png"></div></div><div class="hmpct_word">'+tprm1+'等'+tprs1+'人选了此项</div></div>';
+            var xuanxiang='<div class="xuanxiangson"'+'oid='+oid+'><div class="xuanxiangsontitle"><span class="xuanxiangname">'+xuangxiangname+'</span><span class="piaoshuc">(<span class="piaoshuN">'+piaoshu+'</span>票)</span></div><div class="xs"><div class="xianshizhanbi"></div><div class="hmpct"><img src="img/ckrs.png"></div></div><div class="hmpct_word">'+tprm1+'等'+tprs1+'人选了此项</div></div>';
         }else{
-            var xuanxiang='<div class="xuanxiangson"'+'oid='+oid+'><div class="xuanxiangsontitle"><span class="xuanxiangname">'+xuangxiangname+'</span><span class="piaoshuc">(<span class="piaoshuN">'+piaoshu+'</span>票)</span></div><div class="xs"><div class="xianshizhanbi"></div><div class="hmpct"><img src="image/ckrs.png"></div></div><div class="hmpct_word">0人选了此项</div></div>';
+            var xuanxiang='<div class="xuanxiangson"'+'oid='+oid+'><div class="xuanxiangsontitle"><span class="xuanxiangname">'+xuangxiangname+'</span><span class="piaoshuc">(<span class="piaoshuN">'+piaoshu+'</span>票)</span></div><div class="xs"><div class="xianshizhanbi"></div><div class="hmpct"><img src="img/ckrs.png"></div></div><div class="hmpct_word">0人选了此项</div></div>';
         }
         $('.xuanxiangsoncontainer').append(xuanxiang);
          searchdsrxl();
     }
     //添加单个选项2
     function addxuanxiang1(xuangxiangname,piaoshu,xuanxiang,oid){
-        var xuanxiang='<div class="xuanxiangson"'+'oid='+oid+'><div class="xuanxiangsontitle"><span class="xuanxiangname">'+xuangxiangname+'</span><span class="piaoshuc">(<span class="piaoshuN">'+piaoshu+'</span>票)</span></div><div class="xs"><div class="xianshizhanbi"></div><div class="hmpct"><img src="image/ckrs.png"></div></div><div class="hmpct_word">'+xuanxiang+'</div></div>';
+        var xuanxiang='<div class="xuanxiangson"'+'oid='+oid+'><div class="xuanxiangsontitle"><span class="xuanxiangname">'+xuangxiangname+'</span><span class="piaoshuc">(<span class="piaoshuN">'+piaoshu+'</span>票)</span></div><div class="xs"><div class="xianshizhanbi"></div><div class="hmpct"><img src="img/ckrs.png"></div></div><div class="hmpct_word">'+xuanxiang+'</div></div>';
         $('.xuanxiangsoncontainer').append(xuanxiang);
         searchdsrxl();
     }
@@ -171,7 +171,7 @@ function xxpaixu(){
     //拉票
     $('.lapiao').on('click',function(){
         console.log(ytp);
-        var lpurl="https:\/\/vote.zeffee.com:8443\/getThemeDetail\/"+tid;
+        var lpurl="https:\/\/vote.zeffee.com:8443\/getThemeDetail\/#投票人"+tid;
         for (var i = 0; i < ytp.length; i++) {
             lpurl+="#"+ytp[i];
         }
