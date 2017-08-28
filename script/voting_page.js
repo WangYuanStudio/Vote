@@ -114,10 +114,10 @@ $.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
 					        data: JSON.stringify(GetJsonData()),
 					        dataType: "json",
 					        success: function (message) {
-					        	console.log(message)
+					        	window.location.href = "tpjg.html";
 					        },
 					        error: function (message) {
-					            
+					            console.log(message)
 					        }
 					    });
 				}
