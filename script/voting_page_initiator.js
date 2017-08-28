@@ -42,10 +42,11 @@ $.get(url,function(data){
 				        contentType: "application/json; charset=utf-8",
 				        dataType: "json",
 				        success: function (message) {
-				        	
+				        	alert("删除成功");
+						window.location.href = "index.html";
 				        },
 				        error: function (message) {
-				            
+				            alert("删除失败");
 				        }
 				    });
 			}
@@ -152,11 +153,10 @@ $.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
 					        data: JSON.stringify(GetJsonData()),
 					        dataType: "json",
 					        success: function (message) {
-					        	console.log(message);
-					        	window.location = "";
+					        	window.location.href = "tpjg.html";
 					        },
 					        error: function (message) {
-					            
+					            alert(messagr);
 					        }
 					});
 				}
