@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<head>
+		<title>修改投票页面</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<!-- 		<script src="script/flexible_css.debug.js"></script>
+		<script src="script/flexible.debug.js"></script> -->
+		<link rel="stylesheet" href="style/weui.css">
+		<link rel="stylesheet" href="style/fqtp.css">
+	</head>
+	<body>
+	<!--投票页面的容器-->
+	<div class="container">
+		<!--投票页面的头部logo-->
+		<div class="vote_text_container nav">
+			<img src="img/logo.png">
+		</div>
+		<!--投票页面的标题＋详情-->
+		<div class="vote_text_container top">
+			<div class="vote_text__title">
+				<input type="text" class="vote_text__title_text" maxlength="100" placeholder="投票标题(必填)">
+			</div>
+			<div class="vote_text__title_describe">
+				<textarea class="vote_text__title_describe_text" placeholder="请输入投票详情描述(选填)" maxlength="500"></textarea>
+			</div>
+		</div>
+		<!--投票内容-->
+		<div class="vote_text_container xuanxiang">
+			<div class="xuanxiangcontainer">
+				<img src="img/js.svg" class="jianshao"/>
+				<input type="text" placeholder="选项描述">
+			</div>
+			<div class="xuanxiangcontainer">
+				<img src="img/js.svg" class="jianshao"/>
+				<input type="text" placeholder="选项描述">
+			</div>
+			<!--点击添加选项-->
+			<div class="xuanxiangcontainer tianjiaxuanxiang">
+				<img src="img/zj.svg" class="tianjia" alt="">
+				<span>
+					添加选项
+				</span>
+			</div>
+		</div>
+		<div class="vote_text_container othercontainer">
+			<div class="otertext">投票开始时间<span class="showDatePicker"><span class="choice_date">23:15</span><span class="year_mouth_date">2017-07-17</span> </span></div>
+			<div class="otertext duoxuan">多选<img src="img/dx1.svg"/></div>
+			<div class="otertext kexuangeshu">可选个数<span>可选 <span class="snaume">1</span> 个</span></div>
+			<div class="otertext niming">匿名<img src="img/dx1.svg"/></div>
+			<div class="otertext">投票截止时间<span class="showDatePicker2"><span class="choice_date2">23:15</span><span class="year_mouth_date2">2017-07-17</span> </span></div>
+		</div>
+
+		<button>
+			修改投票
+		</button>
+		<div class="weui-footer copyright">
+            <p class="weui-footer__links">
+                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0NDk0MTc0MQ==&scene=124#wechat_redirect" class="weui-footer__link">零壹派出品</a>
+            </p>
+		<p class="weui-footer__text">
+			Copyright © 2017 Wangyuan Info Studio
+		</p>
+		</div>
+	</div>
+	<script src="script/zepto.min.js">
+	</script>
+	<script src="script/changeVote.js"></script>
+	<script src="script/jweixin-1.0.0.js"></script>
+	<script src="script/weui.min.js"></script>
+	</body>
+</html>

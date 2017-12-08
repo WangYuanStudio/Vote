@@ -1,0 +1,53 @@
+*
+{
+	-webkit-tap-highlight-color: transparent;  
+	font-size: 1.2rem;
+}
+a
+{
+	text-decoration : none;
+}
+body
+{
+	background-color: #eeeeee;
+	height: 100vh;
+	margin: 0;
+}
+.create_voting
+{
+	position: relative;
+	width: 100%;
+	height: calc(50% - 9px);
+	background-color: #fff;
+	text-align: center;
+}
+.historical_voting
+{
+	position: relative;
+	width: 100%;
+	height: calc(50% - 9px);
+	background-color: #fff;
+	text-align: center;
+	margin-top: 18px;
+}
+img
+{
+	padding-top: 10%;
+	height: 30%;
+}
+.voting_button
+{
+	position: relative;
+	margin: 11.25% auto 0 auto;
+	height: 60px;
+	width: 91%;
+	text-align: center;
+	line-height: 60px;
+	background-color: #0685cc;
+	border: 2px solid #056aa3;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	color: #fff;
+}

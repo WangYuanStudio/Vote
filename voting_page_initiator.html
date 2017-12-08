@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>主页</title>
+	<link rel="stylesheet" type="text/css" href="style/voting_page_initiator.css">
+	<link rel="stylesheet" href="style/weui.css">
+	<meta charset="utf-8">
+	<script type="text/javascript" src="script/zepto.min.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+	<div class="page">
+		<nav>
+			<img src="img/logo.png">
+		</nav>
+		<div class="voting_explain">
+			<p class="title" id="title"><span id="state"></span></p>
+			<p class="main" id="main"></p>
+			<p class="supplement">（说明：投票结果于投票后可见。）</p>
+		</div>
+		<div class="voting_select" id="voting_select">
+			
+		</div>
+		<div class="voting_select_explain">
+			<p>（投票截止时间：<span id="end_time"></span>）</p>
+			<p>（仅可在无人投票时修改或删除）</p>
+		</div>
+		<div class="voting_button voting_button_1" id="voting_button_1">
+			投票
+		</div>
+		<div class="voting_button voting_button_2" id="voting_button_2">
+			修改投票
+		</div>
+		<div class="voting_button voting_button_3" id="voting_button_3">
+			删除投票
+		</div>
+		<p class="explain" id="explain"></p>
+	</div>
+	<p class="copyright">
+		<div class="weui-footer copyright">
+            <p class="weui-footer__links">
+                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0NDk0MTc0MQ==&scene=124#wechat_redirect" class="weui-footer__link">零壹派出品</a>
+            </p>
+			<p class="weui-footer__text">
+				Copyright © 2017 Wangyuan Info Studio
+			</p>
+		</div>
+	</p>
+</body>
+<script type="text/javascript" src="script/voting_page_initiator.js"></script>
+</html>
