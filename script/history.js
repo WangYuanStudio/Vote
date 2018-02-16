@@ -105,3 +105,6 @@ $('.search').bind('input propertychange',function(e){
 
 });
 
+$('.home-container').on('click',function(){
+   window.location.href="/";
+})

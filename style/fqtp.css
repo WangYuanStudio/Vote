@@ -47,7 +47,7 @@ body{
 .container .vote_text_container .vote_text__title{
 	padding:0.6rem 0 0.8rem 0;
 	width: calc(100% - 1.0rem);
-	border-bottom:0.2rem solid #bfbfbf;
+	border-bottom:2px solid #bfbfbf;
 	margin-left: 1.0rem;
 }
 .container .vote_text_container .vote_text__title .vote_text__title_text{
@@ -170,7 +170,7 @@ button{
 	font-size: 1.4rem;
 	color: #fff;
 	background-color: #0685cc;
-	border-radius: 15px;
+	border-radius: 7px;
 }
 button:active{
 	background-color: #0569a4;

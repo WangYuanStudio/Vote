@@ -24,19 +24,39 @@ form .icon-search{
 	position: absolute;
 	width: 0.17rem;
 	height: 0.17rem;
-	left: 0.3rem;
+	left: calc(0.3rem + 39px);
 	top: 0.22rem;
 }
-
+form .home-container{
+	position: absolute;
+	left: 0.15rem;
+	height:0.31rem;
+	line-height: 0.62rem;
+	border-right: 2px solid #989898;
+	padding-right: 5px;
+	width: 0.18rem;
+}
+form .icon-home{
+	width: 0.18rem;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+}
 form .search{
 	height: 0.31rem;
-	width: 80%;
+	width: 90%;
+	max-width: calc(100% - 0.18rem - 7px - 0.45rem);
 	font-size: 0.14rem;
 	padding-left: 0.45rem;
+	padding-right: 0.45rem;
 	box-sizing: border-box;
 	border-radius: 20px;
 	outline: none;
-	float: left;
+	float: right;
+	margin-right: 30px;
+	border-width: 0px;
 }
 
 form .btn{
@@ -46,10 +66,15 @@ form .btn{
 	color: #0685cc;
 	font-size: 0.14rem;
 	cursor: pointer;
-	float: right;
-	width: 20%;
-	height: 0.3rem;
 	display: none;
+	position: absolute;
+	right: calc(0.16rem + 42px);
+	top: 0.18rem;
+	width: 0.22rem;
+	height: 0.22rem;
+	background-image:url(../img/delatevalue.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
 .clear{

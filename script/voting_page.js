@@ -103,18 +103,9 @@ $.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
 		{
 			document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
 			document.getElementById("voting_button_1").style.color="#c0bebf";
-			var jumpTime=3;
-			document.getElementById("voting_button_1").innerHTML="已参与投票，"+jumpTime+"s后自动跳转";			
-			document.getElementById("voting_button_1").addEventListener('click',function(){
-				window.location.href="/tpjg.html?tid="+tid; 
-			});
-			setInterval(function(){
-				jumpTime--;
-				document.getElementById("voting_button_1").innerHTML="已参与投票，"+jumpTime+"s后自动跳转";				
-			},1000);
-			setTimeout(function(){
-				window.location.href="/tpjg.html?tid="+tid; 				
-			},3000);
+			document.getElementById("voting_button_1").innerHTML="已参与投票";
+			alert("您已投票！");			
+			window.location.href="/tpjg.html?tid="+tid; 	
 		}
 		else
 		{

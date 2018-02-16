@@ -9,10 +9,13 @@
                 if(xuanxiangs>2){
                     xuanxiangs=xuanxiangs-1;
                 }
-		    	for (var i = 2; i <=xuanxiangs; i++) {
-					var writer= new ObjStory(i,i);
-		    		arr[i-2]=writer;
-		    	}
+                arr[0]=new ObjStory('不限','不限');
+                if($('.jianshao').length>2){
+                	for (var i = 2; i <= xuanxiangs; i++) {
+						var writer= new ObjStory(i,i);
+		    			arr[i-1]=writer;
+		    		}
+                }
 
         weui.picker(arr, {
             onConfirm: function (result) {
@@ -21,7 +24,7 @@
             defaultValue: $('input').length-1,
         });
     });
-		var newinput='<div class="xuanxiangcontainer"><img src="img/js.svg" class="jianshao"/><input type="text" placeholder="选项描述"></div>'
+		var newinput='<div class="xuanxiangcontainer"><img src="img/js.svg" class="jianshao"/><input type="text" placeholder="选项描述" maxlength="24"></div>'
 		var shijian={
 			removeinput : function(event){
 				if ($('.jianshao').length<=2) {
@@ -50,7 +53,7 @@
 			if($(this).attr('src')=="img/dx1.svg"){
 				$(this).attr('src',"img/dx2.svg");
 				$('.kexuangeshu').css('display','block');
-                $('.snaume').text(2);
+                $('.snaume').text('不限');
 			}else{
 				$(this).attr('src',"img/dx1.svg");
 				$('.kexuangeshu').css('display','none');
@@ -270,7 +273,12 @@
                 resultN.description=$('.vote_text__title_describe_text').val();
                 resultN.start_time=$(".year_mouth_date").text()+" "+$(".choice_date").text()+":00";
                 resultN.end_time=$(".year_mouth_date2").text()+" "+$(".choice_date2").text()+":00";
-                resultN.votes_per_user=parseInt($('.snaume').text());
+                if (!isNaN($('.snaume').text())) {
+                	resultN.votes_per_user=parseInt($('.snaume').text());
+                }else{
+                	resultN.votes_per_user=parseInt($('.jianshao').length);
+                }
+                console.log(resultN.votes_per_user);
                 resultN.counts=1;
                 resultN.uid="zeffeeff";
                 resultN.anonymous=ifniming;

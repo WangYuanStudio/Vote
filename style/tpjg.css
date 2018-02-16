@@ -178,7 +178,7 @@ button{
 	font-size: 1.4rem;
 	color: #454545;
 	background-color: inherit;
-	border-radius: 16px;
+	border-radius: 7px;
 	margin: 0 4% 1.6rem 4%;
 }
 button:active{
