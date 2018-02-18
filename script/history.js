@@ -34,12 +34,11 @@ function showAll(){
     
     //搜索框的内容消失
     $('.search').val(''); 
-   
+    $('.items').empty();
     //访问服务器获得所有的历史投票记录
     $.get("https://vote.zeffee.com:8443/getMyThemeList/",function(data){
       data = JSON.stringify(data);
       var data = eval("("+data+")");
-      console.log(data);
       if(data.data.length==0){
         window.location.href="/no_history.html";
       };
@@ -49,7 +48,7 @@ function showAll(){
       //遍历添加点击跳转事件
       addJump();
       changeTime();
-      setInterval(changeTime,0);
+      setInterval(changeTime,1000);
     });
   }
 showAll();
@@ -86,7 +85,6 @@ $('.search').bind('input propertychange',function(e){
   $.get("https://vote.zeffee.com:8443/getMyThemeList.search?content="+searValue,function(data){
     data = JSON.stringify(data);
     var data = eval("("+data+")");
-    console.log(data);
     $('.items').empty();
     if(data.data.length==0){
       var historyItem='<div class="item"><div class="head-name"><img src="" alt="" class="head"> <span class="name">无相关搜索结果</span></div><div class="time" id="time" style="display:none;"></div><div class="clear"></div></div>';
@@ -98,7 +96,7 @@ $('.search').bind('input propertychange',function(e){
       //遍历添加点击跳转事件
       addJump();
       changeTime();
-      setInterval(changeTime,0);
+      setInterval(changeTime,1000);
     }
   });  
 
