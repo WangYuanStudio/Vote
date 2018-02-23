@@ -5,11 +5,76 @@ tid=parameter[1].split('&')[0].split('=')[1];
 url="https://vote.zeffee.com:8443/getThemeDetail/"+tid;
 parameter[0]="none";
 var votes_per_user;
+function check (){
+	$.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
+		if(data.status==500)
+		{
+			document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
+			document.getElementById("voting_button_1").style.color="#c0bebf";
+			document.getElementById("voting_button_1").innerHTML="已参与投票";
+			alert("您已投票！");			
+			window.location.href="/tpjg.html?tid="+tid; 				
+		}
+		else
+		{
+			$("#voting_button_1").on("touchstart",function(){
+				document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
+			});
+			$("#voting_button_1").on("touchend",function(){
+				document.getElementById("voting_button_1").style.backgroundColor="#0685cc";
+			});
+			$("#voting_button_1").on("click",function(){
+				if(!GetJsonData().oid.length)
+				{
+					alert("你还没选择任何选项");
+					return;
+				}
+				var con=confirm("你确认要投票吗?"); 
+				if(con==true)
+				{
+					$.ajax({
+					        type: "POST",
+					        url: "https://vote.zeffee.com:8443/takeVote",
+					        contentType: "application/json; charset=utf-8",
+					        data: JSON.stringify(GetJsonData()),
+					        dataType: "json",
+					        success: function (message) {
+					        	console.log(JSON.stringify(GetJsonData()));
+					        	window.location.href = "tpjg.html?tid="+tid;
+					        },
+					        error: function (message) {
+					            alert(message);
+					        }
+					});
+				}
+				
+			});
+		}
+	});
+}
+
+function GetJsonData() {
+    oid=new Array();
+    num_oid=0;
+    while(num_oid<$("#voting_select .select_son_s").length)
+    {
+    	oid[num_oid]=parseInt($("#voting_select .select_son_s").eq(num_oid).attr("oid"));
+    	num_oid++;
+    }
+    var json = {
+        "tid": parseInt(tid),
+        "oid":oid
+    };
+    return json;
+}
+
 $.get(url,function(data){
 	data = JSON.stringify(data);
 	var data = eval("("+data+")");
+	console.log(data)
 	if(!data)
 	{
+		alert('获取投票信息失败')
 		return;
 	}
 	if(data.data.counts)
@@ -55,14 +120,6 @@ $.get(url,function(data){
 			}
 		});
 	}
-	if(new Date(Date.parse(data.data.start_time.replace(/-/g,  "/")))>new Date())
-	{
-		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
-	}
-	else
-	{
-		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(进行中)</span>";
-	}
 	document.getElementById("title").setAttribute("tid",data.data.tid);
 	document.getElementById("main").innerHTML=data.data.description;
 	document.getElementById("end_time").innerHTML=data.data.end_time;
@@ -87,6 +144,18 @@ $.get(url,function(data){
 		newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span>";
 		allevent.appendChild(newevent);
 		options++;
+	}
+	if(new Date(Date.parse(data.data.start_time.replace(/-/g,  "/")))>new Date()){
+		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
+	}
+	else{
+		if(new Date(Date.parse(data.data.end_time.replace(/-/g,  "/")))<new Date()){
+			alert('投票已结束');
+			location.href = '/tpjg.html?tid='+tid
+			return 
+		}
+		check()
+		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(进行中)</span>";
 	}
 	$("#voting_select .select_son").click(function(){
 		if($(this).children('img').attr("src").match("radio"))
@@ -125,62 +194,3 @@ $.get(url,function(data){
 		
 	});
  });
-$.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
-		if(data.status==500)
-		{
-			document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
-			document.getElementById("voting_button_1").style.color="#c0bebf";
-			document.getElementById("voting_button_1").innerHTML="已参与投票";
-			alert("您已投票！");			
-			window.location.href="/tpjg.html?tid="+tid; 				
-		}
-		else
-		{
-			$("#voting_button_1").on("touchstart",function(){
-				document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
-			});
-			$("#voting_button_1").on("touchend",function(){
-				document.getElementById("voting_button_1").style.backgroundColor="#0685cc";
-			});
-			$("#voting_button_1").on("click",function(){
-				if(!GetJsonData().oid.length)
-				{
-					alert("你还没选择任何选项");
-					return;
-				}
-				var con=confirm("你确认要投票吗?"); 
-				if(con==true)
-				{
-					$.ajax({
-					        type: "POST",
-					        url: "https://vote.zeffee.com:8443/takeVote",
-					        contentType: "application/json; charset=utf-8",
-					        data: JSON.stringify(GetJsonData()),
-					        dataType: "json",
-					        success: function (message) {
-					        	console.log(JSON.stringify(GetJsonData()));
-					        	window.location.href = "tpjg.html?tid="+tid;
-					        },
-					        error: function (message) {
-					            alert(message);
-					        }
-					});
-				}
-				
-			});
-		}
-	});
-function GetJsonData() {
-    oid=new Array();
-    num_oid=0;
-    while(num_oid<$("#voting_select .select_son_s").length)
-    {
-    	oid[num_oid]=parseInt($("#voting_select .select_son_s").eq(num_oid).attr("oid"));
-    	num_oid++;
-    }
-    var json = {
-        "tid": parseInt(tid),
-        "oid":oid
-    };
-    return json;
-}

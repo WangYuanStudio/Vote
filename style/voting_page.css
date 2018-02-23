@@ -15,7 +15,7 @@ body
 	position: relative;
 	min-height: calc(100vh - 0.8rem - 10px);
 }
-nav
+/*nav
 {
 	z-index: 5000;
 	height: 50px;
@@ -28,12 +28,52 @@ nav img
 {
 	width: 5rem;
 	margin-top: 15px;
+}*/
+.vote_text_container{
+	width: 100%;
+	background-color: #ffffff;
+	margin-bottom: .8rem;
+}
+.nav{
+	height: 50px;
+	margin-bottom: 5px;
+	box-shadow: 0rem 0.1rem 0.5rem 0.005rem rgba(0,0,0,.3);
+	text-align: center;
+	z-index: 999;
+	position: fixed;
+	top: 0px;
+}
+.nav .home_bg{
+	width: 2rem;
+	padding: 0 10px;
+	margin-left: 5px;
+	border-right: 2px solid #bebebe;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 1.5rem;
+}
+.nav img{
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	left: 50%;
+	width: 1.3rem
+}
+.nav .page_name{
+	margin-left: 4.5rem;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 1.5rem;
+	line-height: 1.5rem;
 }
 .voting_explain
 {
 	position: relative;
 	background-color: #fff;
 	padding: 0 4%;
+	margin-top:50px;
 }
 .voting_explain .title
 {

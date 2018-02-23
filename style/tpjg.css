@@ -36,9 +36,30 @@ body{
 	position: fixed;
 	top: 0px;
 }
+.container .nav .home_bg{
+	width: 2rem;
+	padding: 0 10px;
+	margin-left: 5px;
+	border-right: 2px solid #bebebe;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 1.5rem;
+}
 .container .nav img{
-	width: 5rem;
-	margin-top: 15px;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	left: 50%;
+	width: 1.3rem
+}
+.container .nav .page_name{
+	margin-left: 4.5rem;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 1.5rem;
+	line-height: 1.5rem;
 }
 .container .top{
 	margin-top: 55px;
@@ -46,10 +67,9 @@ body{
 .container .vote_text_container .tpjg_title{
 	font-size: 1.5rem;
 	padding:0.6rem 0 0.8rem 0;
-	width: calc(100% - 1.0rem);
 	color: #0685cc;
 	font-family: 微软雅黑;
-	margin-left: 1.0rem;
+	margin:0 1.0rem;
 }
 .container .vote_text_container .tpjg_title .tpjg_title_text{
 	font-family: 微软雅黑;
@@ -67,8 +87,7 @@ body{
 	color: #454545;
 	font-family: 微软雅黑;
 	padding:0rem 0 0.8rem 0;
-	width: calc(100% - 1.0rem);
-	margin-left: 1.0rem;
+	margin:0 1.0rem;
 	word-wrap : break-word;
 }
 .container .vote_text_container .sxnav{
@@ -79,30 +98,28 @@ body{
 }
 .container .vote_text_container .sxnav .sxpaixu{
 	float: left;
-	height: 3.2rem;
+	height: 1.5rem;
 	border:2px solid #056aa3;
-	border-left:3px solid #056aa3;
-	border-right:2px solid #056aa3;
 	text-align: center;
 	width: calc(50% - 0.5rem);
-	line-height: 3.2rem;
+	line-height: 1.5rem;
 	color: #454545;
 	font-size: 1.1rem;
 }
 .container .vote_text_container .sxnav .sxchoice{
-	border:1px solid #056aa3;
+	/*border:1px solid #056aa3;*/
 	background-color: #0685cc;
 	color: #ffffff;
-	height: 3.3rem;
-	line-height: 3.3rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
 }
 .container .vote_text_container .sxnav .sxpaixu:first-child{
-	border-bottom-left-radius: 8px;
-	border-top-left-radius: 8px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
 }
 .container .vote_text_container .sxnav .sxpaixu:last-child{
-	border-bottom-right-radius: 8px;
-	border-top-right-radius: 8px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 .container .vote_text_container .xuanxiangsoncontainer{

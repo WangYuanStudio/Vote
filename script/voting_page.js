@@ -12,93 +12,8 @@ for (let i = 0; i < parameter[1].split(/[&=]/).length; i++) {
 		choiceOidindex=choiceOidindex+1;
 	}
 }
-
-url="https://vote.zeffee.com:8443/getThemeDetail/"+tid;
-var votes_per_user;
-$.get(url,function(data){
-	data = JSON.stringify(data);
-	var data = eval("("+data+")");
-	if(new Date(Date.parse(data.data.start_time.replace(/-/g,  "/")))>new Date())
-	{
-		$('title').text(data.data.title+"(未开始)|零壹派投票系统");				
-		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
-	}
-	else
-	{
-		$('title').text(data.data.title+"(进行中)|零壹派投票系统");		
-		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(进行中)</span>";
-	}
-	document.getElementById("title").setAttribute("tid",data.data.tid);
-	document.getElementById("main").innerHTML=data.data.description;
-	document.getElementById("end_time").innerHTML=data.data.end_time;
-	document.getElementById("explain").innerHTML="本次投票信息将被公开";
-	if(data.data.anonymous)
-	{
-		document.getElementById("explain").innerHTML="本次投票信息将不被公开";
-	}
-	img_src="img/radio1.svg";
-	votes_per_user=data.data.votes_per_user;
-	if(data.data.votes_per_user>1)
-	{
-		img_src="img/multiselect1.svg";
-	}
-	options=0;
-	while(data.data.options[options]!=undefined)
-	{
-		allevent=document.getElementById("voting_select");
-		newevent=document.createElement("div");
-		newevent.setAttribute("class", "select_son");
-		newevent.setAttribute("oid", data.data.options[options]["oid"]);
-		// parameter
-		if(contains(choiceOid,data.data.options[options]["oid"].toString()))
-		{
-			// newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span><span class='sharer'>("+parameter[1]+"投此项)</span>";
-			newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span><span class='sharer'>(分享者投此项)</span>";
-		}
-		else
-		{
-			newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span>";
-		}
-		allevent.appendChild(newevent);
-		options++;
-	}
-	$("#voting_select .select_son").click(function(){
-		if($(this).children('img').attr("src").match("radio"))
-		{
-			if($(this).children('img').attr("src").match("1"))
-			{
-				$("#voting_select img").attr("src","img/radio1.svg");
-				$("#voting_select").attr("class","select_son");
-				$(this).children('img').attr("src","img/radio2.svg");
-				$(this).attr("class","select_son_s");
-			}
-			else
-			{
-				$(this).children('img').attr("src","img/radio1.svg")
-				$(this).attr("class","select_son");
-			}
-		}
-		else
-		{
-			if($(this).children('img').attr("src").match("1"))
-			{
-				if($("#voting_select .select_son_s").length==votes_per_user)
-				{
-					return;
-				}
-				$(this).children('img').attr("src","img/multiselect2.svg");
-				$(this).attr("class","select_son_s");
-			}
-			else
-			{
-				$(this).children('img').attr("src","img/multiselect1.svg")
-				$(this).attr("class","select_son");
-			}
-		}
-		
-	});
- });
-$.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
+function check(){
+	$.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
 		if(data.status==500)
 		{
 			document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
@@ -142,6 +57,8 @@ $.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
 			});
 		}
 	});
+}
+
 function GetJsonData() {
     oid=new Array();
     num_oid=0;
@@ -166,3 +83,95 @@ function contains(arr, obj) {
     }  
     return false;  
 }  
+
+url="https://vote.zeffee.com:8443/getThemeDetail/"+tid;
+var votes_per_user;
+$.get(url,function(data){
+	data = JSON.stringify(data);
+	data = eval("("+data+")");
+	document.getElementById("title").setAttribute("tid",data.data.tid);
+	document.getElementById("main").innerHTML=data.data.description;
+	document.getElementById("end_time").innerHTML=data.data.end_time;
+	document.getElementById("explain").innerHTML="本次投票信息将被公开";
+	if(data.data.anonymous)
+	{
+		document.getElementById("explain").innerHTML="本次投票信息将不被公开";
+	}
+	img_src="img/radio1.svg";
+	votes_per_user=data.data.votes_per_user;
+	if(data.data.votes_per_user>1)
+	{
+		img_src="img/multiselect1.svg";
+	}
+	options=0;
+	while(data.data.options[options]!=undefined)
+	{
+		allevent=document.getElementById("voting_select");
+		newevent=document.createElement("div");
+		newevent.setAttribute("class", "select_son");
+		newevent.setAttribute("oid", data.data.options[options]["oid"]);
+		// parameter
+		if(contains(choiceOid,data.data.options[options]["oid"].toString()))
+		{
+			// newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span><span class='sharer'>("+parameter[1]+"投此项)</span>";
+			newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span><span class='sharer'>(分享者投此项)</span>";
+		}
+		else
+		{
+			newevent.innerHTML="<img src="+img_src+"><span>"+data.data.options[options]["content"]+"</span>";
+		}
+		allevent.appendChild(newevent);
+		options++;
+	}
+	if(new Date(Date.parse(data.data.start_time.replace(/-/g,  "/")))>new Date())
+	{
+		$('title').text(data.data.title+"(未开始)|零壹派投票系统");				
+		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
+	}
+	else
+	{
+		if(new Date(Date.parse(data.data.end_time.replace(/-/g,  "/")))<new Date()){
+			alert('投票已结束');
+			location.href = '/tpjg.html?tid='+tid
+			return 
+		}
+		check()
+		$('title').text(data.data.title+"(进行中)|零壹派投票系统");		
+		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(进行中)</span>";
+	}
+	$("#voting_select .select_son").click(function(){
+		if($(this).children('img').attr("src").match("radio"))
+		{
+			if($(this).children('img').attr("src").match("1"))
+			{
+				$("#voting_select img").attr("src","img/radio1.svg");
+				$("#voting_select").attr("class","select_son");
+				$(this).children('img').attr("src","img/radio2.svg");
+				$(this).attr("class","select_son_s");
+			}
+			else
+			{
+				$(this).children('img').attr("src","img/radio1.svg")
+				$(this).attr("class","select_son");
+			}
+		}
+		else
+		{
+			if($(this).children('img').attr("src").match("1"))
+			{
+				if($("#voting_select .select_son_s").length==votes_per_user)
+				{
+					return;
+				}
+				$(this).children('img').attr("src","img/multiselect2.svg");
+				$(this).attr("class","select_son_s");
+			}
+			else
+			{
+				$(this).children('img').attr("src","img/multiselect1.svg")
+				$(this).attr("class","select_son");
+			}
+		}
+		
+	});
+ });

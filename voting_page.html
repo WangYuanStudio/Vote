@@ -4,16 +4,20 @@
 	<title>主页</title>
 	<link rel="stylesheet" href="style/weui.css">
 	<link rel="stylesheet" type="text/css" href="style/voting_page.css">
-	<link rel="stylesheet" type="text/css" href="style/voting_page_initiator.css">
 	<meta charset="utf-8">
 	<script type="text/javascript" src="script/zepto.min.js"></script>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
 	<div class="page">
-		<nav>
-			<img src="img/logo.png">
-		</nav>
+		<div class="vote_text_container nav">
+			<a href="/index.html"><div class="home_bg">
+				<img src="img/home.png">
+			</div></a>
+			<div class="page_name">
+				投票结果
+			</div>
+		</div>
 		<div class="voting_explain">
 			<p class="title" id="title"><span id="state">(进行中)</span></p>
 			<p class="main" id="main"></p>
