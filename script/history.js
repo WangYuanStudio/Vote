@@ -75,7 +75,8 @@ function changeTime(thisEndTime){
 }
 
 //搜索监听
-$('.search').bind('input propertychange',function(e){
+$(document).ready(function(){
+  $('.search').bind('input propertychange',function(e){
   $('.btn').css('display','block');
   $(".btn").unbind("click");
   $('.btn').on('click',function(){
@@ -106,3 +107,5 @@ $('.search').bind('input propertychange',function(e){
 $('.home-container').on('click',function(){
    window.location.href="/";
 })
+})
+

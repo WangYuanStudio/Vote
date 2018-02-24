@@ -138,7 +138,7 @@ body{
 }
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .xianshizhanbi{
 	width: calc(100% - 3.8rem);
-	height: 2.2rem;
+	height: 1.5rem;
 	background-color: #eeeeee;
 	border-left: 0 solid #bfbfbf;
 	margin: 17px 3.8rem 0 0;
@@ -151,9 +151,8 @@ body{
 }
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct{
 	position: absolute;
-	font-size: 4.4rem;
 	right: .5rem;
-	top: 0px;
+	top: 4px;
 	cursor: pointer;
 	height: 22px;
 	line-height: 0;
@@ -168,7 +167,7 @@ body{
 	display: none;
 }
 .container .vote_text_container .xuanxiangsoncontainer .xuanxiangson .hmpct img{
-	width: 2.2rem;
+	width: 2rem;
 }
 .container .vote_text_container .xuanxiangsoncontainer .piaoshuc{
 	color: #bfbfbf;
@@ -189,7 +188,7 @@ body{
 }
 button{
 	height: 3.5rem;
-	border:.2rem solid #056aa3;
+	border:1px solid #056aa3;
 	width: 91%;
 	outline: 0px;
 	font-size: 1.4rem;

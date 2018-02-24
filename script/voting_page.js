@@ -145,7 +145,7 @@ $.get(url,function(data){
 			if($(this).children('img').attr("src").match("1"))
 			{
 				$("#voting_select img").attr("src","img/radio1.svg");
-				$("#voting_select").attr("class","select_son");
+				//$("#voting_select").attr("class","select_son");
 				$(this).children('img').attr("src","img/radio2.svg");
 				$(this).attr("class","select_son_s");
 			}

@@ -45,9 +45,6 @@ img
 	line-height: 60px;
 	background-color: #0685cc;
 	border: 2px solid #056aa3;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
+	border-radius: 10px;
 	color: #fff;
 }

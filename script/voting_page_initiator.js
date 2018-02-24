@@ -71,7 +71,6 @@ function GetJsonData() {
 $.get(url,function(data){
 	data = JSON.stringify(data);
 	var data = eval("("+data+")");
-	console.log(data)
 	if(!data)
 	{
 		alert('获取投票信息失败')
@@ -92,7 +91,7 @@ $.get(url,function(data){
 			document.getElementById("voting_button_2").style.backgroundColor="";
 		});
 		$('#voting_button_2').on('click',function(event) {
-			window.location.href = "http://local.zeffee.com/changeVote.html?tid="+tid;
+			window.location.href = "/changeVote.html?tid="+tid;
 		});
 		$("#voting_button_3").on("touchstart",function(){
 			document.getElementById("voting_button_3").style.backgroundColor="#ba3a3b";
@@ -163,7 +162,7 @@ $.get(url,function(data){
 			if($(this).children('img').attr("src").match("1"))
 			{
 				$("#voting_select img").attr("src","img/radio1.svg");
-				$("#voting_select").attr("class","select_son");
+				//$("#voting_select").attr("class","select_son");
 				$(this).children('img').attr("src","img/radio2.svg");
 				$(this).attr("class","select_son_s");
 			}
