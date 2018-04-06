@@ -25,7 +25,7 @@ $.ajax({
 });
 
 $.ajax({
-   url: "https://vote.zeffee.com:8443//vote/self_record/"+tid,
+   url: "https://vote.zeffee.com:8443/self_record/"+tid,
    xhrFields: {
       withCredentials: true
    },
