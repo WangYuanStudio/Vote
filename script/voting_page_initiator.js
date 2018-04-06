@@ -6,7 +6,12 @@ url="https://vote.zeffee.com:8443/getThemeDetail/"+tid;
 parameter[0]="none";
 var votes_per_user;
 function check (){
-	$.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
+	$.ajax({
+	   url: "https://vote.zeffee.com:8443/checkVoted/"+tid,
+	   xhrFields: {
+	      withCredentials: true
+	   },
+	   success: function(data){
 		if(data.status==500)
 		{
 			document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
@@ -36,6 +41,9 @@ function check (){
 					        type: "POST",
 					        url: "https://vote.zeffee.com:8443/takeVote",
 					        contentType: "application/json; charset=utf-8",
+					        xhrFields: {
+					           withCredentials: true
+					        },
 					        data: JSON.stringify(GetJsonData()),
 					        dataType: "json",
 					        success: function (message) {
@@ -50,6 +58,7 @@ function check (){
 				
 			});
 		}
+	}
 	});
 }
 
@@ -68,7 +77,12 @@ function GetJsonData() {
     return json;
 }
 
-$.get(url,function(data){
+$.ajax({
+   url: url,
+   xhrFields: {
+      withCredentials: true
+   },
+   success: function(data){
 	data = JSON.stringify(data);
 	var data = eval("("+data+")");
 	if(!data)
@@ -107,6 +121,9 @@ $.get(url,function(data){
 				        type: "DELETE",
 				        url: "https://vote.zeffee.com:8443/deleteTheme/"+tid,
 				        contentType: "application/json; charset=utf-8",
+				        xhrFields: {
+				           withCredentials: true
+				        },
 				        dataType: "json",
 				        success: function (message) {
 				        	alert("删除成功");
@@ -192,4 +209,5 @@ $.get(url,function(data){
 		}
 		
 	});
+}
  });

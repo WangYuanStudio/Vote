@@ -4,7 +4,12 @@ parameter=url.split("/");
 parameter=parameter[parameter.length-1].split("?");
 tid=parameter[1].split('&')[0].split('=')[1];
 var ytp=new Array();
-$.get("https://vote.zeffee.com:8443/getThemeDetail/"+tid,function(data){
+$.ajax({
+   url: "https://vote.zeffee.com:8443/getThemeDetail/"+tid,
+   xhrFields: {
+      withCredentials: true
+   },
+   success:function(data){
     data = JSON.stringify(data);
     var data = eval("("+data+")");
     $('.tpjg_title_text').text(data.data.title);
@@ -16,13 +21,20 @@ $.get("https://vote.zeffee.com:8443/getThemeDetail/"+tid,function(data){
     changebl();//改变票的显示
     anonymous(data.data.anonymous);//匿名隐藏
     $(".jiezhishijian").text("(投票截止时间："+data.data.end_time+")");
+}
 });
 
-$.get("https://vote.zeffee.com:8443/self_record/"+tid,function(data){
+$.ajax({
+   url: "https://vote.zeffee.com:8443//vote/self_record/"+tid,
+   xhrFields: {
+      withCredentials: true
+   },
+   success:function(data){
     sdata = JSON.stringify(data);
     var sdata = eval("("+sdata+")");
     ytp=sdata.data;
     changebl();
+}
 });
 var tprm1;
 var tprs1;
@@ -34,7 +46,12 @@ function anonymous(anonymous){
     }
 }
 function tprsrm(oid){
-    $.get("https://vote.zeffee.com:8443/option/userList/"+oid,function(data){
+    $.ajax({
+       url: "https://vote.zeffee.com:8443/option/userList/"+oid,
+       xhrFields: {
+          withCredentials: true
+       },
+       success:function(data){
         data = JSON.stringify(data);
         var data = eval("("+data+")");
         tprm1=data.data[0];
@@ -43,6 +60,7 @@ function tprsrm(oid){
             $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text(tprm1+' 等'+tprs1+'人选了此项');
         }else{   
             $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text(tprs1+' 人选了此项');            
+        }
         }
      });
 }
@@ -176,13 +194,13 @@ function xxpaixu(){
 
     //复制投票链接
     $('.fuzhi').on('click',function(){
-        $('.fuzhi').attr("data-clipboard-text",'http://local.zeffee.com/voting_page.html?tid='+tid);
+        $('.fuzhi').attr("data-clipboard-text","https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect");
         var clipboard = new Clipboard('.fuzhi');
         alert("你已成功复制投票链接，粘贴到聊天窗口输入栏或朋友圈即可！");
     });
     //拉票
     $('.lapiao').on('click',function(){
-        var lpurl="local.zeffee.com\/voting_page.html?tid="+tid;
+        var lpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect";
         for (var i = 0; i < ytp.length; i++) {
             lpurl+="&oid="+ytp[i];
         }

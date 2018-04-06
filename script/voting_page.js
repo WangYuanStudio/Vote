@@ -13,7 +13,12 @@ for (let i = 0; i < parameter[1].split(/[&=]/).length; i++) {
 	}
 }
 function check(){
-	$.get("https://vote.zeffee.com:8443/checkVoted/"+tid,function(data){
+	$.ajax({
+	   url: "https://vote.zeffee.com:8443/checkVoted/"+tid,
+	   xhrFields: {
+	      withCredentials: true
+	   },
+	   success:function(data){
 		if(data.status==500)
 		{
 			document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
@@ -43,6 +48,9 @@ function check(){
 					        type: "POST",
 					        url: "https://vote.zeffee.com:8443/takeVote",
 					        contentType: "application/json; charset=utf-8",
+					        xhrFields: {
+					           withCredentials: true
+					        },
 					        data: JSON.stringify(GetJsonData()),
 					        dataType: "json",
 					        success: function (message) {
@@ -56,6 +64,7 @@ function check(){
 				}
 			});
 		}
+	}
 	});
 }
 
@@ -86,7 +95,12 @@ function contains(arr, obj) {
 
 url="https://vote.zeffee.com:8443/getThemeDetail/"+tid;
 var votes_per_user;
-$.get(url,function(data){
+$.ajax({
+   url: url,
+   xhrFields: {
+      withCredentials: true
+   },
+   success:function(data){
 	data = JSON.stringify(data);
 	data = eval("("+data+")");
 	document.getElementById("title").setAttribute("tid",data.data.tid);
@@ -174,4 +188,5 @@ $.get(url,function(data){
 		}
 		
 	});
+}
  });

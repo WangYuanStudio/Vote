@@ -289,6 +289,9 @@ type : "POST",
 url : "https://vote.zeffee.com:8443/addTheme",
 contentType : "application/json;charset=utf-8",
 data:saveData,
+xhrFields: {
+   withCredentials: true
+},
 dataType : "json",
 success:function(data){
     data = JSON.stringify(data);

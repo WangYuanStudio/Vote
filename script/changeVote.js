@@ -6,7 +6,12 @@ parameter[0]="none";
 var votes_per_user;
 var ytp=new Array();
 var voteData;
-$.get("https://vote.zeffee.com:8443/getThemeDetail/"+tid,function(data){
+    $.ajax({
+       url: "https://vote.zeffee.com:8443/getThemeDetail/"+tid,
+       xhrFields: {
+          withCredentials: true
+       },
+        success:function(data){
                 data = JSON.stringify(data);
                 voteData = eval("("+data+")");
                 $('.vote_text__title_text').val(voteData.data.title);
@@ -32,7 +37,8 @@ $.get("https://vote.zeffee.com:8443/getThemeDetail/"+tid,function(data){
                 if(voteData.data.anonymous){
                     $('.niming img').click();
                 }
-});
+        } 
+    });
         $('.kexuangeshu').on('click', function () {
 		    	function ObjStory(id,type){
 		    		this.label = id;
@@ -315,6 +321,9 @@ $.get("https://vote.zeffee.com:8443/getThemeDetail/"+tid,function(data){
                 var saveData = JSON.stringify(resultN);
                 $.ajax({
                     type : "PUT",
+                    xhrFields: {
+                       withCredentials: true
+                    },
                     url : "https://vote.zeffee.com:8443/updateTheme",
                     contentType : "application/json;charset=utf-8",
                     data:saveData,

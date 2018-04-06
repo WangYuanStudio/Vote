@@ -36,7 +36,12 @@ function showAll(){
     $('.search').val(''); 
     $('.items').empty();
     //访问服务器获得所有的历史投票记录
-    $.get("https://vote.zeffee.com:8443/getMyThemeList/",function(data){
+    $.ajax({
+       url: "https://vote.zeffee.com:8443/getMyThemeList/",
+       xhrFields: {
+          withCredentials: true
+       },
+       success:function(data){
       data = JSON.stringify(data);
       var data = eval("("+data+")");
       if(data.data.length==0){
@@ -49,6 +54,7 @@ function showAll(){
       addJump();
       changeTime();
       setInterval(changeTime,1000);
+    }
     });
   }
 showAll();
@@ -83,7 +89,12 @@ $(document).ready(function(){
     showAll();
   });
   var searValue=$('.search').val();
-  $.get("https://vote.zeffee.com:8443/getMyThemeList.search?content="+searValue,function(data){
+  $.ajax({
+     url: "https://vote.zeffee.com:8443/getMyThemeList.search?content="+searValue,
+     xhrFields: {
+        withCredentials: true
+     },
+     success:function(data){
     data = JSON.stringify(data);
     var data = eval("("+data+")");
     $('.items').empty();
@@ -99,6 +110,7 @@ $(document).ready(function(){
       changeTime();
       setInterval(changeTime,1000);
     }
+  }
   });  
 
 
