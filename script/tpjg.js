@@ -36,7 +36,7 @@ $.ajax({
     changebl();
 }
 });
-var tprm1;
+var tprm1='';
 var tprs1;
 var thisAnonymous;
 function anonymous(anonymous){
@@ -54,12 +54,16 @@ function tprsrm(oid){
        success:function(data){
         data = JSON.stringify(data);
         var data = eval("("+data+")");
-        tprm1=data.data[0];
-        tprs1=data.data.length;
-        if(tprs1>=1){
-            $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text(tprm1+' 等'+tprs1+'人选了此项');
-        }else{   
-            $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text(tprs1+' 人选了此项');            
+        if(data.data.length){
+            for(var ul=0;ul<data.data.length;ul++){
+                tprm1+=data.data[ul]+'、'
+            }
+            console.log(tprm1)
+            tprm1=tprm1.substring(0,tprm1.length-1)
+            $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text(tprm1+' 选了此项');
+        }
+        else{
+            $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text('0人选了此项');
         }
         }
      });

@@ -45,7 +45,7 @@ function showAll(){
       data = JSON.stringify(data);
       var data = eval("("+data+")");
       if(data.data.length==0){
-        window.location.href="/no_history.html";
+        window.location.href="./no_history.html";
       };
       for (let i = 0; i < data.data.length; i++) {
         addHistoryItem(data.data[i].tid,data.data[i].photo,data.data[i].title,data.data[i].end_time);
@@ -68,7 +68,7 @@ function addHistoryItem(tid,imgSrc,voteItemTitle,endTime){
 function addJump(){
   $('.item').on('click',function(e) {
     var tid=parseInt($(this).attr('tid'));
-    window.location.href="/voting_page_initiator.html?tid="+tid;
+    window.location.href="./voting_page_initiator.html?tid="+tid;
   });
 }
 //循环改变时间

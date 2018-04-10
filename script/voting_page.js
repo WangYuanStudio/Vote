@@ -1,4 +1,5 @@
-url=window.location.href;
+$(document).ready(function(){
+	url=window.location.href;
 parameter=url.split("/");
 parameter=parameter[parameter.length-1].split("?");
 tid=parameter[1].split('&')[0].split('=')[1];
@@ -29,10 +30,10 @@ function check(){
 		}
 		else
 		{
-			$("#voting_button_1").on("touchstart",function(){
+			$("#voting_button_1").on("touchStart",function(){
 				document.getElementById("voting_button_1").style.backgroundColor="#0569a4";
 			});
-			$("#voting_button_1").on("touchend",function(){
+			$("#voting_button_1").on("touchEnd",function(){
 				document.getElementById("voting_button_1").style.backgroundColor="#0685cc";
 			});
 			$("#voting_button_1").on("click",function(){
@@ -141,6 +142,8 @@ $.ajax({
 	{
 		$('title').text(data.data.title+"(未开始)|零壹派投票系统");				
 		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
+		document.getElementById('voting_button_1').innerHTML = "投票未开始"
+		document.getElementById('voting_button_1').style.backgroundColor="#888"
 	}
 	else
 	{
@@ -190,3 +193,5 @@ $.ajax({
 	});
 }
  });
+
+})

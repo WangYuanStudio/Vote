@@ -1,4 +1,5 @@
-url=window.location.href;
+$(document).ready(function(){
+	url=window.location.href;
 parameter=url.split("/");
 parameter=parameter[parameter.length-1].split("?");
 tid=parameter[1].split('&')[0].split('=')[1];
@@ -163,8 +164,11 @@ $.ajax({
 	}
 	if(new Date(Date.parse(data.data.start_time.replace(/-/g,  "/")))>new Date()){
 		document.getElementById("title").innerHTML=data.data.title+"<span id='state'>(未开始)</span>";
+		document.getElementById('voting_button_1').innerHTML = "投票未开始"
+		document.getElementById('voting_button_1').style.backgroundColor="#888"
 	}
 	else{
+		console.log(1)
 		if(new Date(Date.parse(data.data.end_time.replace(/-/g,  "/")))<new Date()){
 			alert('投票已结束');
 			location.href = '/tpjg.html?tid='+tid
@@ -211,3 +215,5 @@ $.ajax({
 	});
 }
  });
+
+})
