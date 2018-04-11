@@ -168,7 +168,6 @@ $.ajax({
 		document.getElementById('voting_button_1').style.backgroundColor="#888"
 	}
 	else{
-		console.log(1)
 		if(new Date(Date.parse(data.data.end_time.replace(/-/g,  "/")))<new Date()){
 			alert('投票已结束');
 			location.href = '/tpjg.html?tid='+tid

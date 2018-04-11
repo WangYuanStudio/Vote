@@ -65,6 +65,7 @@ function tprsrm(oid){
         else{
             $('.xuanxiangson[oid="'+oid+'"]').find('.hmpct_word').text('0人选了此项');
         }
+        tprm1=''
         }
      });
 }
