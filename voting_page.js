@@ -14,8 +14,12 @@ for (let i = 0; i < parameter[1].split(/[&=]/).length; i++) {
 		// choiceOidindex=choiceOidindex+1;
 	}
 }
-oidtext=oidtext.split('{')[1].split('}')[0];
-choiceOid=oidtext.split(',');
+if(oidtext!=''){
+	oidtext=oidtext.split('{')[1].split('}')[0];
+	choiceOid=oidtext.split(',');
+}
+
+
 function check(){
 	$.ajax({
 	   url: "https://vote.zeffee.com:8443/checkVoted/"+tid,
@@ -122,7 +126,7 @@ $.ajax({
 		img_src="img/multiselect1.svg";
 	}
 	options=0;
-	while(data.data.options[options]!=undefined)
+	while(typeof(data.data.options[options])!='undefined')
 	{
 		allevent=document.getElementById("voting_select");
 		newevent=document.createElement("div");
