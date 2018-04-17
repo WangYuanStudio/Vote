@@ -1,9 +1,69 @@
 $('document').ready(function(){
+
+
+  
 url=window.location.href;
 parameter=url.split("/");
 parameter=parameter[parameter.length-1].split("?");
 tid=parameter[1].split('&')[0].split('=')[1];
+if (parameter[1].split('&')[1]) {
+	if (parameter[1].split('&')[2]) {
+		var jupoid=parameter[1].split('&')[2].split('=')[1];
+    	var juplpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+'-{'+jupoid+'}'+"#wechat_redirect";
+    	window.location.href=juplpurl; 
+	}else{
+    	var juplpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect";
+		window.location.href=juplpurl; 
+	}
+}
+ $.ajax({
+   url: "https://vote.zeffee.com:8443/getShareInfo?url="+window.location.href,
+   xhrFields: {
+      withCredentials: true
+   },
+   success:function(data){
+    data = JSON.stringify(data);
+    var data = eval("("+data+")");
+    console.log(data);
+    wx.config({  
+    	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
+    	appId: data.appId, // 必填，公众号的唯一标识  
+    	timestamp: data.timestamp, // 必填，生成签名的时间戳  
+    	nonceStr: data.nonceStr, // 必填，生成签名的随机串  
+    	signature: data.signature,// 必填，签名，见附录1  
+    	jsApiList: ['onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2  
+	});
+wx.ready(function(){  
+	wx.onMenuShareAppMessage({
+		title: '邀请你参与'+$('title').text()+'的投票', // 分享标题
+		desc: '点此链接参与', // 分享描述
+		link: window.location.href+'&fenxiang=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		imgUrl: 'https://vote.zeffee.com/img/create_voting.svg', // 分享图标
+		type: '', // 分享类型,music、video或link，不填默认为link
+		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		success: function () {
+			alert('分享投票成功！');
+		},
+		cancel: function () {
+			alert('您取消了分享。');
+
+// 用户取消分享后执行的回调函数
+			}
+	});
+
+});  
+wx.error(function(res){  
+   console.log(res);
+    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。  
+    var juplpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect";
+	window.location.href=juplpurl;  
+}); 
+
+}
+});
 var ytp=new Array();
+
+
 $.ajax({
    url: "https://vote.zeffee.com:8443/getThemeDetail/"+tid,
    xhrFields: {
@@ -201,20 +261,113 @@ function xxpaixu(){
     $('.fuzhi').on('click',function(){
         $('.fuzhi').attr("data-clipboard-text","https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect");
         var clipboard = new Clipboard('.fuzhi');
-        alert("你已成功复制投票链接，粘贴到聊天窗口输入栏或朋友圈即可！");
+        alert("点击右上角即可分享给朋友");
+  $.ajax({
+   url: "https://vote.zeffee.com:8443/getShareInfo?url="+window.location.href,
+   xhrFields: {
+      withCredentials: true
+   },
+   success:function(data){
+    data = JSON.stringify(data);
+    var data = eval("("+data+")");
+    console.log(data);
+    wx.config({  
+    	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
+    	appId: data.appId, // 必填，公众号的唯一标识  
+    	timestamp: data.timestamp, // 必填，生成签名的时间戳  
+    	nonceStr: data.nonceStr, // 必填，生成签名的随机串  
+    	signature: data.signature,// 必填，签名，见附录1  
+    	jsApiList: ['onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2  
+	});
+wx.ready(function(){  
+	wx.onMenuShareAppMessage({
+		title: '邀请你'+$('title').text()+'的投票', // 分享标题
+		desc: '点此链接参与投票', // 分享描述
+		link: window.location.href+'&fenxiang=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		imgUrl: 'https://vote.zeffee.com/img/create_voting.svg', // 分享图标
+		type: '', // 分享类型,music、video或link，不填默认为link
+		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		success: function () {
+			alert('分享投票成功！');
+		},
+		cancel: function () {
+			alert('您取消了分享。');
+
+// 用户取消分享后执行的回调函数
+			}
+	});
+
+});  
+wx.error(function(res){  
+   console.log(res);
+    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。  
+    	var juplpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect";
+		window.location.href=juplpurl;  
+}); 
+
+}
+});
     });
     //拉票
     $('.lapiao').on('click',function(){
-        var newOID=''
+        var newOID='';
+        var newword='';
         for (var i = 0; i < ytp.length; i++) {
             newOID+=ytp[i]+',';
+            newword+=' 【'+$(".xuanxiangson[oid='"+ytp[i]+"']").find('.xuanxiangname').text()+'】 ';
         }
         newOID=(newOID.substring(newOID.length-1)==',')?newOID.substring(0,newOID.length-1):newOID;
-
         var lpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+'-{'+newOID+'}'+"#wechat_redirect";
         $('.lapiao').attr("data-clipboard-text",lpurl);
         var clipboard = new Clipboard('.lapiao');
-        alert("你已成功复制拉票链接，粘贴到聊天窗口输入栏或朋友圈即可。他人通过你分享的链接可看到你的选择！");
+        alert("点击右上角分享给朋友即可拉票，朋友可以看到你的投票对象。");
+  $.ajax({
+   url: "https://vote.zeffee.com:8443/getShareInfo?url="+window.location.href,
+   xhrFields: {
+      withCredentials: true
+   },
+   success:function(data){
+    data = JSON.stringify(data);
+    var data = eval("("+data+")");
+    console.log(data);
+    wx.config({  
+    	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
+    	appId: data.appId, // 必填，公众号的唯一标识  
+    	timestamp: data.timestamp, // 必填，生成签名的时间戳  
+    	nonceStr: data.nonceStr, // 必填，生成签名的随机串  
+    	signature: data.signature,// 必填，签名，见附录1  
+    	jsApiList: ['onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2  
+	});
+wx.ready(function(){  
+	wx.onMenuShareAppMessage({
+		title: '我参与了'+$('.tpjg_title_text').text()+'的投票，快帮我给我的选项投上一票', // 分享标题
+		desc: '请给'+newword+'投上一票', // 分享描述
+		link: window.location.href+'&fenxiang=1'+"&oid="+newOID, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		imgUrl: 'https://vote.zeffee.com/img/create_voting.svg', // 分享图标
+		type: '', // 分享类型,music、video或link，不填默认为link
+		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		success: function () {
+			alert('分享拉票成功！');
+		},
+		cancel: function () {
+			alert('您取消了拉票。');
+
+// 用户取消分享后执行的回调函数
+			}
+	});
+
+});  
+wx.error(function(res){  
+   console.log(res);
+    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。  
+    	var juplpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect";
+		window.location.href=juplpurl; 
+}); 
+
+}
+});
+
+
     });
 
     //下拉查看投票人
