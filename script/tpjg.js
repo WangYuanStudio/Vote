@@ -35,7 +35,7 @@ if (parameter[1].split('&')[1]) {
 	});
 wx.ready(function(){  
 	wx.onMenuShareAppMessage({
-		title: '邀请你参与'+$('title').text()+'的投票', // 分享标题
+		title: '邀请你参与投票《'+$('.tpjg_title_text').text()+'》', // 分享标题
 		desc: '点此链接参与', // 分享描述
 		link: window.location.href+'&fenxiang=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 		imgUrl: 'https://vote.zeffee.com/img/create_voting.svg', // 分享图标
@@ -281,7 +281,7 @@ function xxpaixu(){
 	});
 wx.ready(function(){  
 	wx.onMenuShareAppMessage({
-		title: '邀请你'+$('title').text()+'的投票', // 分享标题
+		title: '邀请你参与投票《'+$('.tpjg_title_text').text()+'》', // 分享标题
 		desc: '点此链接参与投票', // 分享描述
 		link: window.location.href+'&fenxiang=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 		imgUrl: 'https://vote.zeffee.com/img/create_voting.svg', // 分享图标
@@ -340,7 +340,7 @@ wx.error(function(res){
 	});
 wx.ready(function(){  
 	wx.onMenuShareAppMessage({
-		title: '我参与了'+$('.tpjg_title_text').text()+'的投票，快帮我给我的选项投上一票', // 分享标题
+		title: '我参与了投票《'+$('.tpjg_title_text').text()+'》，快帮我给我的选项投上一票', // 分享标题
 		desc: '请给'+newword+'投上一票', // 分享描述
 		link: window.location.href+'&fenxiang=1'+"&oid="+newOID, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 		imgUrl: 'https://vote.zeffee.com/img/create_voting.svg', // 分享图标
