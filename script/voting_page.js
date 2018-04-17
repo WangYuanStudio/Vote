@@ -7,12 +7,19 @@ tid=parameter[1].split('&')[0].split('=')[1];
 //获得url中的oid值
 var choiceOid=new Array();
 var choiceOidindex=0;
+var oidtext='';
 for (let i = 0; i < parameter[1].split(/[&=]/).length; i++) {
 	if(parameter[1].split(/[&=]/)[i]=='oid'){
-		choiceOid[choiceOidindex]=parameter[1].split(/[&=]/)[i+1];
-		choiceOidindex=choiceOidindex+1;
+		oidtext=parameter[1].split(/[&=]/)[i+1];
+		// choiceOidindex=choiceOidindex+1;
 	}
 }
+if(oidtext!=''){
+	oidtext=oidtext.split('{')[1].split('}')[0];
+	choiceOid=oidtext.split(',');
+}
+
+
 function check(){
 	$.ajax({
 	   url: "https://vote.zeffee.com:8443/checkVoted/"+tid,
@@ -119,7 +126,7 @@ $.ajax({
 		img_src="img/multiselect1.svg";
 	}
 	options=0;
-	while(data.data.options[options]!=undefined)
+	while(typeof(data.data.options[options])!='undefined')
 	{
 		allevent=document.getElementById("voting_select");
 		newevent=document.createElement("div");

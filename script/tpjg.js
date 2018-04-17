@@ -205,10 +205,13 @@ function xxpaixu(){
     });
     //拉票
     $('.lapiao').on('click',function(){
-        var lpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+"#wechat_redirect";
+        var newOID=''
         for (var i = 0; i < ytp.length; i++) {
-            lpurl+="&oid="+ytp[i];
+            newOID+=ytp[i]+',';
         }
+        newOID=(newOID.substring(newOID.length-1)==',')?newOID.substring(0,newOID.length-1):newOID;
+
+        var lpurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b3c63ee9e929594&redirect_uri=http%3A%2F%2Fwww.zeffee.com%2Fredirect.php&response_type=code&scope=snsapi_userinfo&state=vote-"+tid+'-{'+newOID+'}'+"#wechat_redirect";
         $('.lapiao').attr("data-clipboard-text",lpurl);
         var clipboard = new Clipboard('.lapiao');
         alert("你已成功复制拉票链接，粘贴到聊天窗口输入栏或朋友圈即可。他人通过你分享的链接可看到你的选择！");
