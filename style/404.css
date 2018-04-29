@@ -1,0 +1,22 @@
+*{
+	-webkit-tap-highlight-color: transparent;  
+}
+html{
+	font-size: 100px;
+}
+body{
+	background-color: #eeeeee;
+	margin: 0;
+	padding: 0;
+}
+img{
+	display: block;
+	width: 2.6rem;
+	margin: 1.22rem auto 0.09rem auto;
+}
+p{
+	font-size: 0.189rem;
+	color: #cccccc;
+	margin: 0 auto;
+	width: 2.6rem;
+}

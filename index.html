@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<title>主页</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	<script type="text/javascript" src="script/zepto.min.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+	<div class="create_voting">
+		<img src="img/create_voting.svg">
+		<a href='fqtp.html'><div class="voting_button" id="create_voting">
+			创建投票
+		</div></a>
+	</div>
+	<div class="historical_voting">
+		<img src="img/historical_voting.svg">
+		<a href='history.html'><div class="voting_button" id="historical_voting">
+			历史投票
+		</div></a>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".voting_button").on("touchstart",function(){
+			$(this).css("backgroundColor","#0569a4");
+		});
+		$(".voting_button").on("touchend",function(){
+			$(this).css("backgroundColor","#0685cc");
+		});
+	})
+</script>
+</html>
