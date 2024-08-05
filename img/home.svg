@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 34" width="35" height="34">
+	<defs>
+		<image width="80" height="78" id="img1" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA3OCIgd2lkdGg9IjgwIiBoZWlnaHQ9Ijc4Ij4KCTxzdHlsZT4KCQl0c3BhbiB7IHdoaXRlLXNwYWNlOnByZSB9CgkJLnNocDAgeyBmaWxsOiBub25lO3N0cm9rZTogI2JlYmViZTtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLXdpZHRoOiA4IH0gCgk8L3N0eWxlPgoJPGcgaWQ9IlBhZ2UgMSI+CgkJPHBhdGggaWQ9IlBhdGggMSIgY2xhc3M9InNocDAiIGQ9Ik03NiAzNkw0MCA0TDQgMzZNNjQgNDFMNjQgNjkuOTJDNjQgNzIuMTcgNjIuMTcgNzQgNTkuOTIgNzRMMjAuMDggNzRDMTcuODMgNzQgMTYgNzIuMTcgMTYgNjkuOTJMMTYgNDEiIC8+Cgk8L2c+Cjwvc3ZnPg=="/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+	</style>
+	<use id="矢量智能对象" href="#img1" transform="matrix(0.438,0,0,0.436,0,0)"/>
+</svg>
